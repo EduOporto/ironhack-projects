@@ -1,6 +1,17 @@
 import itertools
 from random import shuffle
 
+# FUNCTION THAT GENERATES THE TABLE
+
+def set_table(n_players):
+    table = {'Dealer': []}
+    for player in list(range(1,int(n_players)+1)):
+        name = input(f"PLAYER_{player}, PLEASE,TELL ME YOUR NAME: ")
+        print("\n")
+        table[name] = []
+    
+    return table
+
 #FUNCTION THAT GENERATES A SHUFFLED LIST OF 52 TUPLES, EACH OF THOSE IS A (CARD NAME, VALUE) THAT ALTOGETHER MAKES A STANDARD DECK OF CARDS
 
 def card_shuffler():
