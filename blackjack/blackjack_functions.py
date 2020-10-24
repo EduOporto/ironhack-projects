@@ -23,17 +23,6 @@ def dealer(deck):
     for card in deck:
         yield card
 
-# EACH PLAYER IS A KEY OF A DICTIONARY, EACH KEY AS A LIST AS A VALUE, AND THIS LIST RECIEVES THE CARDS THE DEALER IS DEALING
-
-#def set_table(n):
- #   table_dict = {'Dealer': []}
- #   num_players = list(range(1,n+1))
-
- #   for e in num_players:
-  #      table_dict[f'Player{e}'] = []
-
- #   return table_dict
-
 
 # NOW A FOR LOOP CAN GO AND ASSIGN CARDS IN ORDER TO THE DICT (TABLE): FIRST TO PLAYER 1, SECOND TO DEALER, THIRD TO PLAYER 1 ... AND SO ON UP TO EACH OF THE PLAYERS HAS TWO CARDS
 
@@ -46,29 +35,35 @@ def first_dealt(table, n_deals, dealer):
 
     return table
 
-# AFTER THE LOOP EACH OF THE PLAYERS IN THE TABLE HAS TWO CARDS 
 # NOW IS TIME TO SHOW THE TABLE STATUS
 
-#print("----------TABLE----------")
-#print(f"Dealer: {table['Dealer'][0][0]}/**")
-#for player in [e for e in table][1:]:
- #   cards_str = ""
- #   for card in table[player]:
-  #      cards_str += (card[0]+"/")
- #   print(f"{player}: {cards_str}")
+def status(table, dealer_shows=False):
+    print("\n----------TABLE----------\n")
+    if dealer_shows:
+        print(f"Dealer: {table['Dealer'][0][0]}/{table['Dealer'][0][0]}")
+    else:
+        print(f"Dealer: {table['Dealer'][0][0]}/**")
+    
+    for player in [e for e in table][1:]:
+        cards_str = ""
+        for card in table[player]:
+            cards_str += (card[0]+"/")
+        print(f"{player}: {cards_str}")
 
 # ASK EACH OF THEM IF THEY WANT AN EXTRA CARD
-def new_deal(table_status, player_to_ask):
-    new_dealts = []
+
+def new_deal(table, players_to_ask, deal_card):
+    more_deals = []
     for player in players_to_ask:
+        print("\n")
         choice = input(f"{player}, would you like another card?(y/n): ")
         if choice.lower() == 'y':
-            new_dealts.append(player)
+            more_deals.append(player)
             table[player].append(next(deal_card))
         else:
             pass
         
-    return table, new_dealts
+    return table, more_deals
 
 
     
