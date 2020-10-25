@@ -46,6 +46,19 @@ def first_dealt(table, n_deals, dealer):
 
     return table
 
+# FUNCTION THAT CHECKS OUT THE POINTS (AND CHOOSES WHETHER THE ACE IS 1 OR 11)
+
+def points_checker(hand):
+    points = [e[1] for e in hand]
+    while 0 in points:
+        points.remove(0)
+        if sum(points) <= 10:
+            points.append(11)
+        else:
+            points.append(1)
+    
+    return points
+
 # NOW IS TIME TO SHOW THE TABLE STATUS
 
 def status(table, dealer_shows=False):
@@ -69,13 +82,29 @@ def status(table, dealer_shows=False):
 def new_deal(table, players_to_ask, deal_card):
     more_deals = []
     for player in players_to_ask:
-        print("\n")
-        choice = input(f"{player}, would you like another card?(y/n): ")
-        if choice.lower() == 'y':
-            more_deals.append(player)
-            table[player].append(next(deal_card))
+        acc = 0
+        points = [acc+e[1] for e in table[player]]
+        if 0 in points:
+            points.remove(0)
+            if sum(points) <= 10:
+                points.append(11)
+            else:
+                points.append(1)
         else:
             pass
+
+        if sum(points) == 21 and len(points) <= 3:
+            table[player].append(('BLACKJACK!!', 0))
+        elif sum(points) > 21:
+            table[player].append(('LOSE...', 0))
+        else:
+            print("\n")
+            choice = input(f"{player}, would you like another card?(y/n): ")
+            if choice.lower() == 'y':
+                more_deals.append(player)
+                table[player].append(next(deal_card))
+            else:
+                pass
         
     return table, more_deals
 
@@ -119,26 +148,28 @@ def checker(table):
     for player, hand in table.items():
         points = [e[1] for e in hand]
         if 0 in points:
+            points.remove(0)
             if sum(points) <= 10:
-                points = sum(points) + 11
+                points.append(11)
             else:
-                points = sum(points) + 1
+                points.append(1)
         else:
-            points = sum(points)
+            pass
         
-        if points == 21 and len(hand) <= 3:
-            blackjacks.append((player, points))
-        elif points <= 21 and len(hand) > 3:
-            less_or_21.append((player, points))
+        if sum(points) == 21 and len(points) <= 3:
+            blackjacks.append((player, sum(points)))
+        if sum(points) <= 21:
+            less_or_21.append((player, sum(points)))
         else:
-            losers.append((player, points))
-        
+            losers.append((player, sum(points)))
+    
     if len(blackjacks) > 0:
         print(f"\nBlackjacks: {[e[0] for e in blackjacks]}")
     else:
         if len(less_or_21) > 0:
-            less_or_21.sort(key= lambda x: x[1])
-            print(f"\nWinners: {less_or_21[0][0]}")
+            #less_or_21.sort(key= lambda x: x[1])
+            print(f"\nWinners: {[e[0] for e in less_or_21]}")
         if len(losers) > 0:    
             print(f"\nLosers: {[e[0] for e in losers]}")
+
     
