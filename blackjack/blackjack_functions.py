@@ -50,6 +50,12 @@ def first_dealt(table, n_deals, dealer):
 
 def points_checker(hand):
     points = [e[1] for e in hand]
+
+    if 100 in points:
+            points.remove(100)
+    else:
+        pass 
+    
     while 0 in points:
         points.remove(0)
         if sum(points) <= 10:
@@ -82,27 +88,24 @@ def status(table, dealer_shows=False):
 def new_deal(table, players_to_ask, deal_card):
     more_deals = []
     for player in players_to_ask:
-        acc = 0
-        points = [acc+e[1] for e in table[player]]
-        if 0 in points:
-            points.remove(0)
-            if sum(points) <= 10:
-                points.append(11)
-            else:
-                points.append(1)
-        else:
-            pass
-
+        points = points_checker(table[player])
+        
         if sum(points) == 21 and len(points) <= 3:
-            table[player].append(('BLACKJACK!!', 0))
+            table[player].append(('BLACKJACK!!', 100))
         elif sum(points) > 21:
-            table[player].append(('LOSE...', 0))
+            table[player].append(('LOSE...', 100))
         else:
             print("\n")
             choice = input(f"{player}, would you like another card?(y/n): ")
             if choice.lower() == 'y':
-                more_deals.append(player)
                 table[player].append(next(deal_card))
+                points = points_checker(table[player])
+                if sum(points) == 21 and len(points) <= 3:
+                    table[player].append(('BLACKJACK!!', 100))
+                elif sum(points) > 21:
+                    table[player].append(('LOSE...', 100))
+                else:
+                    more_deals.append(player)
             else:
                 pass
         
@@ -146,15 +149,7 @@ def checker(table):
     less_or_21 = []
     losers = []
     for player, hand in table.items():
-        points = [e[1] for e in hand]
-        if 0 in points:
-            points.remove(0)
-            if sum(points) <= 10:
-                points.append(11)
-            else:
-                points.append(1)
-        else:
-            pass
+        points = points_checker(table[player])
         
         if sum(points) == 21 and len(points) <= 3:
             blackjacks.append((player, sum(points)))
