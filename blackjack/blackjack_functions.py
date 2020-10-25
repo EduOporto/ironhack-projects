@@ -51,7 +51,12 @@ def points_checker(hand):
     points = [e[1] for e in hand]
     while 0 in points:
         points.remove(0)
-        if 100 in points:
+        if 150 in points:
+            if sum(points)-150 <= 10:
+                points.append(11)
+            else:
+                points.append(1)
+        elif 100 in points:
             if sum(points)-100 <= 10:
                 points.append(11)
             else:
@@ -84,9 +89,9 @@ def status(table, dealer_shows=False):
     more_deals = []
     for player in [e for e in table][1:]:
         points = points_checker(table[player])
-        if 100 not in points and 50 not in points:
+        if 150 not in points and 100 not in points and 50 not in points:
             if sum(points) == 21 and len(points) <= 3:
-                table[player].append(('BLACKJACK!!', 100))
+                table[player].append(('BLACKJACK!!', 150))
             elif sum(points) > 21:
                 table[player].append(('LOSE...', 100))
             else:
@@ -107,7 +112,7 @@ def new_deal(table, players_to_ask, deal_card):
     for player in players_to_ask: 
         points = points_checker(table[player])
         
-        if 100 not in points:    
+        if 150 not in points and 100 not in points:    
             print("\n")
             choice = input(f"{player}, would you like another card?(y/n): ")
             if choice.lower() == 'y':
@@ -152,26 +157,19 @@ def dealer_get(table, deal_card):
 # CHECK WINNERS, LOSERS AND DRAWS
 
 def checker(table):
-    blackjacks = []
-    less_or_21 = []
-    losers = []
-    for player, hand in table.items():
-        points = points_checker(table[player])
+    dealer_points = sum(points_checker(table['Dealer']))
+    for player in [e for e in table][1:]:
+        player_points = [e[1] for e in table[player]]
+        if 150 in player_points:
+            player_points = 22
+        elif 100 in player_points:
+            player_points = 0
+        elif 50 in player_points:
+            player_points = sum(player_points)-50
         
-        if sum(points) == 21 and len(points) <= 3:
-            blackjacks.append((player, sum(points)))
-        if sum(points) <= 21:
-            less_or_21.append((player, sum(points)))
+        if player_points > dealer_points:
+            print (f"{player} wins Dealer")
+        elif player_points < dealer_points:
+            print(f"Dealer wins {player}")
         else:
-            losers.append((player, sum(points)))
-    
-    if len(blackjacks) > 0:
-        print(f"\nBlackjacks: {[e[0] for e in blackjacks]}")
-    else:
-        if len(less_or_21) > 0:
-            #less_or_21.sort(key= lambda x: x[1])
-            print(f"\nWinners: {[e[0] for e in less_or_21]}")
-        if len(losers) > 0:    
-            print(f"\nLosers: {[e[0] for e in losers]}")
-
-    
+            print(f"{player} and Dealer draw")

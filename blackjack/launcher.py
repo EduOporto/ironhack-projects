@@ -37,4 +37,4 @@ blackjack_functions.status(table_with_dealer, dealer_shows=True)
 
 # CHECK BLACKJACKS, WINNERS, LOSERS
 
-#blackjack_functions.checker(table_with_dealer)
+blackjack_functions.checker(table_with_dealer)
