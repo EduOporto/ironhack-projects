@@ -15,7 +15,7 @@ def set_table(n_players):
 #FUNCTION THAT GENERATES A SHUFFLED LIST OF 52 TUPLES, EACH OF THOSE IS A (CARD NAME, VALUE) THAT ALTOGETHER MAKES A STANDARD DECK OF CARDS
 
 def card_shuffler():
-    card_val = [[('A',0)], [('J', 10), ('Q', 10), ('K', 10)], [('2', 2), ('3', 3), ('4', 4), ('5', 5), ('6', 6), ('7', 7), ('8', 8), ('9', 9), ('10', 10)]]
+    card_val = [[('A', 0)], [('J', 10), ('Q', 10), ('K', 10)], [('2', 2), ('3', 3), ('4', 4), ('5', 5), ('6', 6), ('7', 7), ('8', 8), ('9', 9), ('10', 10)]]
     suits = ['-C', '-D', '-H', '-S']
 
     card_deck = []
@@ -28,7 +28,7 @@ def card_shuffler():
     shuffle(card_deck)
     return card_deck
 
-# CREATE A GENERATOR FUNCTION THAT YIELDS EACH OF THE LETTERS OF THE SHUFFLED DECK, SO THEY CAN BE ASSIGNED AMONG THE PLAYERS
+# CREATE A GENERATOR FUNCTION THAT YIELDS EACH OF THE CARDS OF THE SHUFFLED DECK, SO THEY CAN BE ASSIGNED AMONG THE PLAYERS
 
 def dealer(deck):
     for card in deck:
@@ -51,7 +51,10 @@ def first_dealt(table, n_deals, dealer):
 def status(table, dealer_shows=False):
     print("\n----------TABLE----------\n")
     if dealer_shows:
-        print(f"Dealer: {table['Dealer'][0][0]}/{table['Dealer'][0][0]}")
+        cards_str = ""
+        for card in table['Dealer']:
+            cards_str += (card[0]+"/")
+        print(f"Dealer: {cards_str}")
     else:
         print(f"Dealer: {table['Dealer'][0][0]}/**")
     
@@ -75,6 +78,37 @@ def new_deal(table, players_to_ask, deal_card):
             pass
         
     return table, more_deals
+
+# TURN FOR THE DEALER TO GET CARDS
+
+def dealer_get(table, deal_card):
+    acc = 0
+    dealer_points = [acc+e[1] for e in table['Dealer']]
+    
+    dealer_extra_cards = 0
+    
+    while sum(dealer_points) < 17:
+        dealer_extra_cards += 1
+        while 0 in dealer_points:
+            ace_index = dealer_points.index(0)
+            if sum(dealer_points) <= 10:
+                table['Dealer'][ace_index] = (table['Dealer'][ace_index][0], 11)
+                dealer_points = [acc+e[1] for e in table['Dealer']]
+            else:
+                table['Dealer'][ace_index] = (table['Dealer'][ace_index][0], 1)
+                dealer_points = [acc+e[1] for e in table['Dealer']]
+        else:
+            table['Dealer'].append(next(deal_card))
+            dealer_points = [acc+e[1] for e in table['Dealer']]
+
+    if dealer_extra_cards == 1:
+        print(f"\nTHE DEALER NEEDED {dealer_extra_cards} MORE CARD")
+    elif dealer_extra_cards == 0:
+        print(f"\nTHE DEALER NEEDED NO MORE CARDS")
+    else:
+        print(f"\nTHE DEALER NEEDED {dealer_extra_cards} MORE CARDS")
+
+    return table
 
 
     
