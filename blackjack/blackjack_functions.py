@@ -110,5 +110,35 @@ def dealer_get(table, deal_card):
 
     return table
 
+# CHECK WINNERS, LOSERS AND DRAWS
 
+def checker(table):
+    blackjacks = []
+    less_or_21 = []
+    losers = []
+    for player, hand in table.items():
+        points = [e[1] for e in hand]
+        if 0 in points:
+            if sum(points) <= 10:
+                points = sum(points) + 11
+            else:
+                points = sum(points) + 1
+        else:
+            points = sum(points)
+        
+        if points == 21 and len(hand) <= 3:
+            blackjacks.append((player, points))
+        elif points <= 21 and len(hand) > 3:
+            less_or_21.append((player, points))
+        else:
+            losers.append((player, points))
+        
+    if len(blackjacks) > 0:
+        print(f"\nBlackjacks: {[e[0] for e in blackjacks]}")
+    else:
+        if len(less_or_21) > 0:
+            less_or_21.sort(key= lambda x: x[1])
+            print(f"\nWinners: {less_or_21[0][0]}")
+        if len(losers) > 0:    
+            print(f"\nLosers: {[e[0] for e in losers]}")
     

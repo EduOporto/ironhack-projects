@@ -33,3 +33,11 @@ while len(more_deals) > 0:
     else:
         blackjack_functions.status(table_rest_d, dealer_shows=True)
 
+# TURN FOR THE DEALER TO GET CARDS
+
+table_with_dealer = blackjack_functions.dealer_get(table_rest_d, deal_card)
+blackjack_functions.status(table_with_dealer, dealer_shows=True)
+
+# CHECK BLACKJACKS, WINNERS, LOSERS
+
+blackjack_functions.checker(table_with_dealer)
