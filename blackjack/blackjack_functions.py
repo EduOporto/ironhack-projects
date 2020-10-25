@@ -12,7 +12,7 @@ def set_table(n_players):
     
     return table
 
-#FUNCTION THAT GENERATES A SHUFFLED LIST OF 52 TUPLES, EACH OF THOSE IS A (CARD NAME, VALUE) THAT ALTOGETHER MAKES A STANDARD DECK OF CARDS
+# FUNCTION THAT GENERATES A SHUFFLED LIST OF 52 TUPLES, EACH OF THOSE IS A (CARD NAME, VALUE) THAT ALTOGETHER MAKES A STANDARD DECK OF CARDS
 
 def card_shuffler():
     card_val = [[('A', 0)], [('J', 10), ('Q', 10), ('K', 10)], [('2', 2), ('3', 3), ('4', 4), ('5', 5), ('6', 6), ('7', 7), ('8', 8), ('9', 9), ('10', 10)]]
@@ -28,14 +28,13 @@ def card_shuffler():
     shuffle(card_deck)
     return card_deck
 
-# CREATE A GENERATOR FUNCTION THAT YIELDS EACH OF THE CARDS OF THE SHUFFLED DECK, SO THEY CAN BE ASSIGNED AMONG THE PLAYERS
+# GENERATOR FUNCTION THAT YIELDS EACH OF THE CARDS OF THE SHUFFLED DECK, SO THEY CAN BE ASSIGNED AMONG THE PLAYERS
 
 def dealer(deck):
     for card in deck:
         yield card
 
-
-# NOW A FOR LOOP CAN GO AND ASSIGN CARDS IN ORDER TO THE DICT (TABLE): FIRST TO PLAYER 1, SECOND TO DEALER, THIRD TO PLAYER 1 ... AND SO ON UP TO EACH OF THE PLAYERS HAS TWO CARDS
+# FUNCTION THAT ASSIGNS CARDS IN ORDER TO THE DICT (TABLE): FIRST TO PLAYER(S), THEN TO DEALER; SECOND CARD TO PLAYER(S), THEN TO DEALER
 
 def first_dealt(table, n_deals, dealer):
     initial_deals = list(range(2))
@@ -65,7 +64,7 @@ def points_checker(hand):
     
     return points
 
-# NOW IS TIME TO SHOW THE TABLE STATUS
+# FUNCTION THAT SHOWS THE TABLE STATUS
 
 def status(table, dealer_shows=False):
     print("\n----------TABLE----------\n")
@@ -77,39 +76,41 @@ def status(table, dealer_shows=False):
     else:
         print(f"Dealer: {table['Dealer'][0][0]}/**")
     
+    more_deals = []
     for player in [e for e in table][1:]:
+        points = points_checker(table[player])
+        if sum(points) == 21 and len(points) <= 3 and 100 not in points:
+            table[player].append(('BLACKJACK!!', 100))
+        elif sum(points) > 21 and 100 not in points:
+            table[player].append(('LOSE...', 100))
+        elif 50 in points:
+            pass
+        else:
+            more_deals.append(player)
+
         cards_str = ""
         for card in table[player]:
             cards_str += (card[0]+"/")
         print(f"{player}: {cards_str}")
 
+    return more_deals
+
 # ASK EACH OF THEM IF THEY WANT AN EXTRA CARD
 
 def new_deal(table, players_to_ask, deal_card):
-    more_deals = []
-    for player in players_to_ask:
+    for player in players_to_ask: 
         points = points_checker(table[player])
         
-        if sum(points) == 21 and len(points) <= 3:
-            table[player].append(('BLACKJACK!!', 100))
-        elif sum(points) > 21:
-            table[player].append(('LOSE...', 100))
-        else:
+        if 100 not in points:    
             print("\n")
             choice = input(f"{player}, would you like another card?(y/n): ")
             if choice.lower() == 'y':
                 table[player].append(next(deal_card))
-                points = points_checker(table[player])
-                if sum(points) == 21 and len(points) <= 3:
-                    table[player].append(('BLACKJACK!!', 100))
-                elif sum(points) > 21:
-                    table[player].append(('LOSE...', 100))
-                else:
-                    more_deals.append(player)
             else:
-                pass
-        
-    return table, more_deals
+                if 50 not in points:
+                    table[player].append(('PASS', 50))
+                
+    return table 
 
 # TURN FOR THE DEALER TO GET CARDS
 

@@ -15,21 +15,23 @@ deal_card = blackjack_functions.dealer(cards)
 # RUN AND SHOW THE FIRST DEAL
 
 table_first_d = blackjack_functions.first_dealt(table, int(players), deal_card)
-blackjack_functions.status(table_first_d)
+new_deals = blackjack_functions.status(table_first_d)
 
 # RUN THE REST OF THE DEALS
 
-new_deals = [e for e in table_first_d][1:]
-table_rest_d, more_deals = blackjack_functions.new_deal(table_first_d, new_deals, deal_card)
+#new_deals = [e for e in table_first_d][1:]
+table_rest_d = blackjack_functions.new_deal(table_first_d, new_deals, deal_card) # TAKE OUT THIS ARGUMENT/VARIABLE ----> , new_deals / , more_deals
+more_deals = blackjack_functions.status(table_rest_d)
+
 if len(more_deals) > 0:
     blackjack_functions.status(table_rest_d)
 else:
     blackjack_functions.status(table_rest_d, dealer_shows=True)
 
 while len(more_deals) > 0:
-    table_rest_d, more_deals = blackjack_functions.new_deal(table_rest_d, more_deals, deal_card)
+    table_rest_d = blackjack_functions.new_deal(table_rest_d, more_deals, deal_card) # TAKE OUT THIS ARGUMENT/VARIABLE ----> , new_deals / , more_deals
     if len(more_deals) > 0:
-        blackjack_functions.status(table_rest_d)
+        more_deals = blackjack_functions.status(table_rest_d)
     else:
         blackjack_functions.status(table_rest_d, dealer_shows=True)
 
