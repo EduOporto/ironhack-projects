@@ -23,17 +23,12 @@ new_deals = blackjack_functions.status(table_first_d)
 table_rest_d = blackjack_functions.new_deal(table_first_d, new_deals, deal_card) # TAKE OUT THIS ARGUMENT/VARIABLE ----> , new_deals / , more_deals
 more_deals = blackjack_functions.status(table_rest_d)
 
-if len(more_deals) > 0:
-    blackjack_functions.status(table_rest_d)
-else:
-    blackjack_functions.status(table_rest_d, dealer_shows=True)
-
 while len(more_deals) > 0:
     table_rest_d = blackjack_functions.new_deal(table_rest_d, more_deals, deal_card) # TAKE OUT THIS ARGUMENT/VARIABLE ----> , new_deals / , more_deals
-    if len(more_deals) > 0:
-        more_deals = blackjack_functions.status(table_rest_d)
-    else:
-        blackjack_functions.status(table_rest_d, dealer_shows=True)
+    more_deals = blackjack_functions.status(table_rest_d)
+
+print("\nTHE DEALER SHOWS ITS HAND...\n")
+blackjack_functions.status(table_rest_d, dealer_shows=True)
 
 # TURN FOR THE DEALER TO GET CARDS
 
@@ -42,4 +37,4 @@ blackjack_functions.status(table_with_dealer, dealer_shows=True)
 
 # CHECK BLACKJACKS, WINNERS, LOSERS
 
-blackjack_functions.checker(table_with_dealer)
+#blackjack_functions.checker(table_with_dealer)

@@ -49,19 +49,24 @@ def first_dealt(table, n_deals, dealer):
 
 def points_checker(hand):
     points = [e[1] for e in hand]
-
-    if 100 in points:
-            points.remove(100)
-    else:
-        pass 
-    
     while 0 in points:
         points.remove(0)
-        if sum(points) <= 10:
-            points.append(11)
+        if 100 in points:
+            if sum(points)-100 <= 10:
+                points.append(11)
+            else:
+                points.append(1)
+        elif 50 in points:
+            if sum(points)-50 <= 10:
+                points.append(11)
+            else:
+                points.append(1)
         else:
-            points.append(1)
-    
+            if sum(points) <= 10:
+                points.append(11)
+            else:
+                points.append(1)
+
     return points
 
 # FUNCTION THAT SHOWS THE TABLE STATUS
@@ -79,14 +84,15 @@ def status(table, dealer_shows=False):
     more_deals = []
     for player in [e for e in table][1:]:
         points = points_checker(table[player])
-        if sum(points) == 21 and len(points) <= 3 and 100 not in points:
-            table[player].append(('BLACKJACK!!', 100))
-        elif sum(points) > 21 and 100 not in points:
-            table[player].append(('LOSE...', 100))
-        elif 50 in points:
-            pass
+        if 100 not in points and 50 not in points:
+            if sum(points) == 21 and len(points) <= 3:
+                table[player].append(('BLACKJACK!!', 100))
+            elif sum(points) > 21:
+                table[player].append(('LOSE...', 100))
+            else:
+                more_deals.append(player)
         else:
-            more_deals.append(player)
+            pass
 
         cards_str = ""
         for card in table[player]:
@@ -106,7 +112,7 @@ def new_deal(table, players_to_ask, deal_card):
             choice = input(f"{player}, would you like another card?(y/n): ")
             if choice.lower() == 'y':
                 table[player].append(next(deal_card))
-            else:
+            if choice.lower() == 'n':
                 if 50 not in points:
                     table[player].append(('PASS', 50))
                 
