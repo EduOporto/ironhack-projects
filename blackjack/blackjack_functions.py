@@ -51,7 +51,12 @@ def points_checker(hand):
     points = [e[1] for e in hand]
     while 0 in points:
         points.remove(0)
-        if 150 in points:
+        if 200 in points:
+            if sum(points)-200 <= 10:
+                points.append(11)
+            else:
+                points.append(1)
+        elif 150 in points:
             if sum(points)-150 <= 10:
                 points.append(11)
             else:
@@ -79,6 +84,17 @@ def points_checker(hand):
 def status(table, dealer_shows=False):
     print("\n----------TABLE----------\n")
     if dealer_shows:
+        dealer_points = points_checker(table['Dealer'])
+        if 200 not in dealer_points and 150 not in dealer_points and 100 not in dealer_points:
+            if sum(dealer_points) == 21 and len(dealer_points) <= 3:
+                table['Dealer'].append(('BLACKJACK!!', 200))
+            elif sum(dealer_points) == 21 and len(dealer_points) > 3:
+                table['Dealer'].append(('TWENTY-ONE', 150))
+            elif sum(dealer_points) > 21:
+                table['Dealer'].append(('LOSE...', 100))
+        else:
+            pass
+
         cards_str = ""
         for card in table['Dealer']:
             cards_str += (card[0]+"/")
@@ -89,9 +105,11 @@ def status(table, dealer_shows=False):
     more_deals = []
     for player in [e for e in table][1:]:
         points = points_checker(table[player])
-        if 150 not in points and 100 not in points and 50 not in points:
+        if 200 not in points and 150 not in points and 100 not in points and 50 not in points:
             if sum(points) == 21 and len(points) <= 3:
-                table[player].append(('BLACKJACK!!', 150))
+                table[player].append(('BLACKJACK!!', 200))
+            if sum(points) == 21 and len(points) > 3:
+                table[player].append(('TWENTY-ONE', 150))
             elif sum(points) > 21:
                 table[player].append(('LOSE...', 100))
             else:
@@ -112,14 +130,14 @@ def new_deal(table, players_to_ask, deal_card):
     for player in players_to_ask: 
         points = points_checker(table[player])
         
-        if 150 not in points and 100 not in points:    
+        if 200 not in points and 150 not in points and 100 not in points:    
             print("\n")
             choice = input(f"{player}, would you like another card?(y/n): ")
             if choice.lower() == 'y':
                 table[player].append(next(deal_card))
             if choice.lower() == 'n':
-                if 50 not in points:
-                    table[player].append(('PASS', 50))
+                #if 50 not in points:
+                table[player].append(('PASS', 50))
                 
     return table 
 
@@ -157,19 +175,26 @@ def dealer_get(table, deal_card):
 # CHECK WINNERS, LOSERS AND DRAWS
 
 def checker(table):
-    dealer_points = sum(points_checker(table['Dealer']))
-    for player in [e for e in table][1:]:
-        player_points = [e[1] for e in table[player]]
-        if 150 in player_points:
-            player_points = 22
-        elif 100 in player_points:
-            player_points = 0
-        elif 50 in player_points:
-            player_points = sum(player_points)-50
-        
-        if player_points > dealer_points:
-            print (f"{player} wins Dealer")
-        elif player_points < dealer_points:
-            print(f"Dealer wins {player}")
+    results = []
+    for player in [e for e in table]:
+        points = [e[1] for e in table[player]]
+        if 200 in points:
+            points = 22
+        elif 150 in points:
+            points = 21
+        elif 100 in points:
+            points = 0
+        elif 50 in points:
+            points = sum(points)-50
         else:
-            print(f"{player} and Dealer draw")
+            points = sum(points)
+        results.append((player, points))
+    
+    dealer_points = results[0][1]
+    for player in [e for e in results][1:]:
+        if player[1] > dealer_points:
+            print (f"{player[0]} wins Dealer")
+        elif player[1] < dealer_points:
+            print(f"Dealer wins {player[0]}")
+        else:
+            print(f"{player[0]} and Dealer draw")
