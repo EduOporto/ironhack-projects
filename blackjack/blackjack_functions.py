@@ -85,16 +85,6 @@ def status(table, dealer_shows=False):
     print("\n----------TABLE----------\n")
     if dealer_shows:
         dealer_points = points_checker(table['Dealer'])
-        if 200 not in dealer_points and 150 not in dealer_points and 100 not in dealer_points:
-            if sum(dealer_points) == 21 and len(dealer_points) <= 3:
-                table['Dealer'].append(['BLACKJACK!!', 200])
-            elif sum(dealer_points) == 21 and len(dealer_points) > 3:
-                table['Dealer'].append(['TWENTY-ONE', 150])
-            elif sum(dealer_points) > 21:
-                table['Dealer'].append(['LOSE...', 100])
-        else:
-            pass
-
         cards_str = ""
         for card in table['Dealer']:
             cards_str += (card[0]+"/")
@@ -152,6 +142,7 @@ def dealer_get(table, deal_card):
         if len(zero_indexes) == 1:
             if (sum(dealer_points)+11) >= 17 and (sum(dealer_points)+11) <= 21:
                 table['Dealer'][zero_indexes[0]][1] = 11
+                table['Dealer'].append(['PASS', 50])
                 print(f"\nTHE DEALER GOT {dealer_extra_cards}-EXTRA CARDS")
                 return table
             elif (sum(dealer_points)+11) < 17:
@@ -167,6 +158,7 @@ def dealer_get(table, deal_card):
             if (sum(dealer_points)+12) >= 17 and (sum(dealer_points)+12) <= 21:
                 table['Dealer'][zero_indexes[0]][1] = 1
                 table['Dealer'][zero_indexes[1]][1] = 11
+                table['Dealer'].append(['PASS', 50])
                 print(f"\nTHE DEALER GOT {dealer_extra_cards}-EXTRA CARDS")
                 return table
             elif (sum(dealer_points)+12) < 17:
@@ -184,6 +176,7 @@ def dealer_get(table, deal_card):
                 table['Dealer'][zero_indexes[0]][1] = 1
                 table['Dealer'][zero_indexes[1]][1] = 1
                 table['Dealer'][zero_indexes[2]][1] = 11
+                table['Dealer'].append(['PASS', 50])
                 print(f"\nTHE DEALER GOT {dealer_extra_cards}-EXTRA CARDS")
                 return table
             elif (sum(dealer_points)+13) < 17:
@@ -203,6 +196,7 @@ def dealer_get(table, deal_card):
                 table['Dealer'][zero_indexes[1]][1] = 1
                 table['Dealer'][zero_indexes[2]][1] = 1
                 table['Dealer'][zero_indexes[3]][1] = 11
+                table['Dealer'].append(['PASS', 50])
                 print(f"\nTHE DEALER GOT {dealer_extra_cards}-EXTRA CARDS")
                 return table
             elif (sum(dealer_points)+14) < 17:
@@ -223,19 +217,22 @@ def dealer_get(table, deal_card):
                 return table
             elif sum(dealer_points) >= 17 and sum(dealer_points) <= 21:
                 print(f"\nTHE DEALER GOT {dealer_extra_cards}-EXTRA CARDS")
+                table['Dealer'].append(['PASS', 50])
                 return table
             elif sum(dealer_points) < 17:
                 dealer_extra_cards += 1
                 table['Dealer'].append(next(deal_card))
                 dealer_points = [e[1] for e in table['Dealer']]
             elif sum(dealer_points) > 21:
-                table['Dealer'].append(['LOSE', 0])
+                table['Dealer'].append(['LOSE', 100])
                 return table
     
     if sum(dealer_points) == 21 and len(dealer_points) <= 3:
         table['Dealer'].append(['BLACKJACK!!', 200])
+    elif sum(dealer_points) >= 17 and sum(dealer_points) <= 21:
+        table['Dealer'].append(['PASS', 50])
     elif sum(dealer_points) > 21:
-        table['Dealer'].append(['LOSE', 0])
+        table['Dealer'].append(['LOSE', 100])
     
     print(f"\nTHE DEALER GOT {dealer_extra_cards}-EXTRA CARDS")
     return table
