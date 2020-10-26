@@ -29,7 +29,7 @@ Pierde quien:
 
 ## Planteamiento del programa
 
-El programa está dividido en dos archivos, uno con las funciones (*blackjack_functions.py*); y otro encargado de lanzar el programa (*launcher.py*)
+El programa está dividido en cinco archivos, cuatro con las funciones (*table_cards.py, status.py, deals_checker.py, dealer_behaviour.py*); y otro encargado de lanzar el programa (*launcher.py*)
 
 ### Funciones
 
@@ -59,7 +59,9 @@ En caso de que el dealer no haya obtenido un valor de 17 o más, la función *de
 
 Esta función, además, es capaz de otorgar a conveniencia valores de los ases. Por ejemplo: si en una primera ronda el *dealer* recibe un As y un 2 (13), necesitará otra carta para llegar a 17. Si esa carta fuese otro As, la función sabrá que ese segundo As debe tener valor de 1, siendo el valor total de la mano 14 y no 24 de contar ambos ases como 11. Esta función se encuentra en el documento *dealer_behaviour.py*.
 
-Una vez el *dealer* ha recibido todas las cartas necesarias, la mesa final es mostrada a los usuarios; y la función *checker()*, que recibe como argumento el diccionario de dicha mesa final con todas las puntuaciones, decide quién ha ganado entre cada jugador y el *dealer* y lo muestra en la pantalla. Esta función se encuentra en *deals_checker.py*
+Una vez el *dealer* ha recibido todas las cartas necesarias, la mesa final es mostrada a los usuarios; y la función *checker()*, que recibe como argumento el diccionario de dicha mesa final con todas las puntuaciones, decide quién ha ganado entre cada jugador y el *dealer* y lo muestra en la pantalla. Esta función se encuentra en *deals_checker.py*.
+
+Para lanzar el programa debemos ejecutar *launcher.py*, y ahí el programa seguirá el flow descrito arriba. Para repetir el juego habrá que lanzar el programa de nuevo.
 
 ![Blackjack-3](images/img_3.jpeg)
 
