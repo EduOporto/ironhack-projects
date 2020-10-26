@@ -2,7 +2,7 @@
 -------------
 Para este primer projecto me he decantado por crear un programa que emule el juego del 21 blacjack, uno de los juegos de apuestas más populares de todos los casinos, y que tiene una dinámica bastante sencilla.
 
-![Blackjack-1](Blackjack-Table-1.jpg)
+![Blackjack-1](images/img_1.jpg)
 
 ## [Reglas](https://es.wikipedia.org/wiki/Blackjack)
 
@@ -25,7 +25,7 @@ Pierde quien:
 
 #### Existe la posibilidad de empate
 
-![Blackjack-2](how-to-play-blackjack-lead.jpg)
+![Blackjack-2](images/img_2.jpg)
 
 ## Planteamiento del programa
 
@@ -61,7 +61,7 @@ Esta función, además, es capaz de otorgar a conveniencia valores de los ases. 
 
 Una vez el *dealer* ha recibido todas las cartas necesarias, la mesa final es mostrada a los usuarios; y la función *checker()*, que recibe como argumento el diccionario de dicha mesa final con todas las puntuaciones, decide quién ha ganado entre cada jugador y el *dealer* y lo muestra en la pantalla.
 
-![Blackjack-3](20170327215110-21-2008-movie.jpeg)
+![Blackjack-3](images/img_3.jpeg)
 
 
 
