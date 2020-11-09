@@ -4,7 +4,7 @@ from selenium import webdriver
 
 def fplayer_scrap(player_id, data_rq, df_to_fill):
     # Key = table, V = columns I need to take from the table 
-    tables_cols = {'shooting_df': ["shots_on_target_pct", "goals", "shots_on_target", "shots_total", "average_shot_distance", "shots_free_kicks", "pens_made", "pens_att"],
+    tables_cols = {'shooting_df': ["shots_on_target_pct", "goals", "shots_on_target", "shots_total", "shots_total_per90", "shots_on_target_per90", "goals_per_shot", "goals_per_shot_on_target", "average_shot_distance", "shots_free_kicks", "pens_made", "pens_att"],
                    'passing_df': ["passes_pct", "passes_completed", "passes_total_distance", "passes_progressive_distance", "passes_pct_short", "passes_pct_medium", "passes_pct_long" ,"assists", "assisted_shots", "passes_into_final_third", "passes_into_penalty_area", "crosses_into_penalty_area", "progressive_passes"],
                    'defending_df': ["tackles", "tackles_won", "dribble_tackles_pct", "pressure_regain_pct", "blocks", "interceptions", "clearances", "errors"],
                    'dribbling_df': ["dribbles_completed_pct", "players_dribbled_past", "carries", "carry_distance", "carry_progressive_distance", "miscontrols", "dispossessed"],
