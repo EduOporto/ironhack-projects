@@ -2,6 +2,9 @@ from bs4 import BeautifulSoup
 from bs2json import bs2json
 from selenium import webdriver
 import pandas as pd 
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
 
 def fplayer_scrap(player_id, data_rq, df_to_fill):
     # Key = table, V = columns I need to take from the table 
@@ -83,3 +86,36 @@ def just_mean(right_df, left_df, name):
     general_df[f'mean_{name}'] = (round(general_df.iloc[:,1:].mean(axis=1)*2)*10)
     general_rat = general_df.iloc[:,[0,-1]]
     return general_rat
+
+def bar_plot(dataframe, height_l, height_r):
+    f, ax = plt.subplots(1, 2, figsize=(24, 8), sharex=True)
+    font = {'weight': 'bold', 'size': 22}
+    ax[0].set_title(height_l, **font)
+    ax[0].bar(dataframe['short_name'], height=dataframe[height_l])
+
+    ax[1].set_title(height_r, **font)
+    ax[1].bar(dataframe['short_name'], height=dataframe[height_r])
+
+    return ax
+
+def scatter_plot(dataframe, x, y, hue=False):
+    f, ax = plt.subplots(1, 1, figsize=(12, 9), sharex=True)
+    ax.set_xlabel(x, fontsize=18, weight='bold')
+    ax.set_ylabel(y, fontsize=15, weight='bold')
+    if hue != False:
+        sns.scatterplot(data=dataframe, x=x, y=y, hue=hue)
+        return ax
+    if hue == False: 
+        sns.scatterplot(data=dataframe, x=x, y=y)
+        return ax
+
+def player_plot(dataframe, player):
+    f, ax = plt.subplots(1, 1, figsize=(15, 12), sharex=True)
+    font = {'weight': 'bold', 'size': 22}
+    ax.set_title(dataframe.iloc[1,player], **font)
+    ax.set_xlabel('Specifications', fontsize=18, weight='bold')
+    ax.set_ylabel('Rating', fontsize=15, weight='bold')
+    
+    sns.barplot(x=dataframe.index[5:15], y=dataframe.iloc[5:15,player], palette=['seagreen' if ind%2 == 0 else 'navajowhite' for ind, x in enumerate(list(dataframe.index[5:15]))])
+
+    return ax
