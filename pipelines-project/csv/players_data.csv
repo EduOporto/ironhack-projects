@@ -1,112 +1,112 @@
-,sofifa_id,short_name,long_name,age,nationality,club,team_position
-0,20801,Cristiano Ronaldo,Cristiano Ronaldo dos Santos Aveiro,33,Portugal,Juventus,LW
-1,158023,L. Messi,Lionel Andrés Messi Cuccittini,31,Argentina,FC Barcelona,RW
-2,190871,Neymar Jr,Neymar da Silva Santos Junior,26,Brazil,Paris Saint-Germain,CAM
-3,193080,De Gea,David De Gea Quintana,27,Spain,Manchester United,GK
-4,192985,K. De Bruyne,Kevin De Bruyne,27,Belgium,Manchester City,RCM
-5,155862,Sergio Ramos,Sergio Ramos García,32,Spain,Real Madrid,LCB
-6,176580,L. Suárez,Luis Alberto Suárez Díaz,31,Uruguay,FC Barcelona,ST
-7,177003,L. Modrić,Luka Modrić,32,Croatia,Real Madrid,RCM
-8,183277,E. Hazard,Eden Hazard,27,Belgium,Chelsea,LW
-9,200389,J. Oblak,Jan Oblak,25,Slovenia,Atlético Madrid,GK
-10,192119,T. Courtois,Thibaut Courtois,26,Belgium,Real Madrid,GK
-11,167495,M. Neuer,Manuel Neuer,32,Germany,FC Bayern München,GK
-12,182493,D. Godín,Diego Godín,32,Uruguay,Atlético Madrid,LCB
-13,182521,T. Kroos,Toni Kroos,28,Germany,Real Madrid,LCM
-14,188545,R. Lewandowski,Robert Lewandowski,29,Poland,FC Bayern München,ST
-15,211110,P. Dybala,Paulo Bruno Exequiel Dybala,24,Argentina,Juventus,RW
-16,192448,M. ter Stegen,Marc-André ter Stegen,26,Germany,FC Barcelona,GK
-17,197781,Isco,Francisco Román Alarcón Suárez,26,Spain,Real Madrid,SUB
-18,202126,H. Kane,Harry Kane,24,England,Tottenham Hotspur,ST
-19,194765,A. Griezmann,Antoine Griezmann,27,France,Atlético Madrid,RS
-20,215914,N. Kanté,N'Golo Kanté,27,France,Chelsea,RCM
-21,138956,G. Chiellini,Giorgio Chiellini,33,Italy,Juventus,LCB
-22,153079,S. Agüero,Sergio Leonel Agüero del Castillo,30,Argentina,Manchester City,ST
-23,168542,David Silva,David Josué Jiménez Silva,32,Spain,Manchester City,LCM
-24,178603,M. Hummels,Mats  Hummels,29,Germany,FC Bayern München,LCB
-25,179813,E. Cavani,Edinson Roberto Cavani Gómez,31,Uruguay,Paris Saint-Germain,ST
-26,190460,C. Eriksen,Christian  Dannemann Eriksen,26,Denmark,Tottenham Hotspur,RM
-27,195864,P. Pogba,Paul Pogba,25,France,Manchester United,LCM
-28,200145,Casemiro,Carlos Henrique Venancio Casimiro,26,Brazil,Real Madrid,CDM
-29,189242,Coutinho,Philippe Coutinho Correia,26,Brazil,FC Barcelona,LCM
-30,198710,J. Rodríguez,James David Rodríguez Rubio,26,Colombia,FC Bayern München,SUB
-31,209331,M. Salah,Mohamed  Salah Ghaly,26,Egypt,Liverpool,RW
-32,1179,G. Buffon,Gianluigi Buffon,40,Italy,Paris Saint-Germain,SUB
-33,162835,S. Handanovič,Samir Handanovič,33,Slovenia,Inter,GK
-34,164240,Thiago Silva,Thiago Emiliano da Silva,33,Brazil,Paris Saint-Germain,LCB
-35,167664,G. Higuaín,Gonzalo Gerardo Higuaín,30,Argentina,Milan,ST
-36,167948,H. Lloris,Hugo Lloris,31,France,Tottenham Hotspur,GK
-37,173731,G. Bale,Gareth Frank Bale,28,Wales,Real Madrid,RW
-38,176676,Marcelo,Marcelo Vieira da Silva Júnior,30,Brazil,Real Madrid,LB
-39,189511,Sergio Busquets,Sergio Busquets i Burgos,29,Spain,FC Barcelona,CDM
-40,198219,L. Insigne,Lorenzo Insigne,27,Italy,Napoli,LW
-41,231747,K. Mbappé,Kylian Mbappé,19,France,Paris Saint-Germain,RW
-42,205600,S. Umtiti,Samuel Umtiti,24,France,FC Barcelona,LCB
-43,201024,K. Koulibaly,Kalidou Koulibaly,27,Senegal,Napoli,LCB
-44,201399,M. Icardi,Mauro Emanuel Icardi Rivero,25,Argentina,Inter,ST
-45,192505,R. Lukaku,Romelu Lukaku,25,Belgium,Manchester United,ST
-46,152729,Piqué,Gerard Piqué Bernabéu,31,Spain,FC Barcelona,RCB
-47,168651,I. Rakitić,Ivan Rakitić,30,Croatia,FC Barcelona,RCM
-48,171877,M. Hamšík,Marek Hamšík,30,Slovakia,Napoli,CM
-49,172871,J. Vertonghen,Jan Vertonghen,31,Belgium,Tottenham Hotspur,LCB
-50,175943,D. Mertens,Dries Mertens,31,Belgium,Napoli,SUB
-51,184941,A. Sánchez,Alexis Alejandro Sánchez Sánchez,29,Chile,Manchester United,LW
-52,188567,P. Aubameyang,Pierre-Emerick Aubameyang,29,Gabon,Arsenal,LM
-53,189332,Jordi Alba,Jordi Alba Ramos,29,Spain,FC Barcelona,LB
-54,192387,C. Immobile,Ciro Immobile,28,Italy,Lazio,ST
-55,193041,K. Navas,Keylor Navas,31,Costa Rica,Real Madrid,SUB
-56,222492,L. Sané,Leroy Sané,22,Germany,Manchester City,LW
-57,201535,R. Varane,Raphaël Varane,25,France,Real Madrid,RCB
-58,210257,Ederson,Ederson Santana de Moraes,24,Brazil,Manchester City,GK
-59,199556,M. Verratti,Marco Verratti,25,Italy,Paris Saint-Germain,RCM
-60,201942,Roberto Firmino,Roberto Firmino Barbosa de Oliveira,26,Brazil,Liverpool,CF
-61,184432,Azpilicueta,César Azpilicueta Tanco,28,Spain,Chelsea,RB
-62,208722,S. Mané,Sadio Mané,26,Senegal,Liverpool,LW
-63,135507,Fernandinho,Fernando Luiz Rosa,33,Brazil,Manchester City,CDM
-64,171919,Naldo,Ronaldo  Aparecido Rodrigues,35,Brazil,FC Schalke 04,CB
-65,176635,M. Özil,Mesut Özil,29,Germany,Arsenal,RM
-66,177509,M. Benatia,Medhi Amine El Mouttaqi Benatia,31,Morocco,Juventus,SUB
-67,180206,M. Pjanić,Miralem Pjanić,28,Bosnia Herzegovina,Juventus,CDM
-68,181458,I. Perišić,Ivan Perišić,29,Croatia,Inter,LM
-69,183907,J. Boateng,Jérôme Boateng,29,Germany,FC Bayern München,RCB
-70,184344,L. Bonucci,Leonardo Bonucci,31,Italy,Juventus,RCB
-71,189509,Thiago,Thiago Alcântara do Nascimento,27,Spain,FC Bayern München,CDM
-72,189513,Parejo,Daniel Parejo Muñoz,29,Spain,Valencia CF,RCM
-73,189596,T. Müller,Thomas Müller,28,Germany,FC Bayern München,RCM
-74,190483,Douglas Costa,Douglas Costa de Souza,27,Brazil,Juventus,SUB
-75,191043,Alex Sandro,Alex Sandro Lobo Silva,27,Brazil,Juventus,LB
-76,191202,N. Matić,Nemanja Matić,29,Serbia,Manchester United,CDM
-77,192366,N. Otamendi,Nicolás Hernán Otamendi,30,Argentina,Manchester City,LCB
-78,220834,Marco Asensio,Marco Asensio Willemsen,22,Spain,Real Madrid,LW
-79,232363,M. Škriniar,Milan Škriniar,23,Slovakia,Inter,RCB
-80,208421,Saúl,Saúl Ñíguez Esclápez,23,Spain,Atlético Madrid,LCM
-81,212831,Alisson,Alisson Ramses Becker,25,Brazil,Liverpool,GK
-82,223848,S. Milinković-Savić,Sergej Milinković-Savić,23,Serbia,Lazio,CM
-83,209499,Fabinho,Fábio Henrique Tavares,24,Brazil,Liverpool,SUB
-84,216594,N. Fekir,Nabil Fekir,24,France,Olympique Lyonnais,CAM
-85,202652,R. Sterling,Raheem Sterling,23,England,Manchester City,RW
-86,212622,J. Kimmich,Joshua Kimmich,23,Germany,FC Bayern München,RB
-87,192774,K. Manolas,Kostas Manolas,27,Greece,Roma,RCB
-88,197445,D. Alaba,David Olatukunbo Alaba,26,Austria,FC Bayern München,LB
-89,203376,V. van Dijk,Virgil van Dijk,26,Netherlands,Liverpool,LCB
-90,184087,T. Alderweireld,Toby Alderweireld,29,Belgium,Tottenham Hotspur,RCB
-91,193747,Koke,Jorge Resurrección Merodio,26,Spain,Atlético Madrid,RM
-92,9014,A. Robben,Arjen Robben,34,Netherlands,FC Bayern München,RM
-93,41236,Z. Ibrahimović,Zlatan Ibrahimović,36,Sweden,LA Galaxy,RS
-94,120533,Pepe,Képler Laveran Lima Ferreira,35,Portugal,Beşiktaş JK,RCB
-95,139720,V. Kompany,Vincent Kompany,32,Belgium,Manchester City,RCB
-96,156616,F. Ribéry,Franck Bilal Ribéry,35,France,FC Bayern München,LM
-97,164169,Filipe Luís,Filipe Luís Kasmirski,32,Brazil,Atlético Madrid,LB
-98,167397,Falcao,Radamel Falcao García Zárate,32,Colombia,AS Monaco,ST
-99,168609,Miranda,João Miranda de Souza Filho,33,Brazil,Inter,LCB
-100,170890,B. Matuidi,Blaise Matuidi,31,France,Juventus,LCM
-101,178518,R. Nainggolan,Radja Nainggolan,30,Belgium,Inter,CAM
-102,179844,Diego Costa,Diego da Silva Costa,29,Spain,Atlético Madrid,LS
-103,179846,S. Khedira,Sami Khedira,31,Germany,Juventus,RCM
-104,180930,E. Džeko,Edin Džeko,32,Bosnia Herzegovina,Roma,ST
-105,181872,A. Vidal,Arturo Vidal,31,Chile,FC Barcelona,SUB
-106,184267,Y. Brahimi,Yacine Brahimi,28,Algeria,FC Porto,LM
-107,187961,Paulinho,José Paulo Bezzera Maciel Júnior,29,Brazil,Guangzhou Evergrande Taobao FC,LDM
-108,188350,M. Reus,Marco Reus,29,Germany,Borussia Dortmund,LW
-109,192629,Iago Aspas,Iago Aspas Juncal,30,Spain,RC Celta,RW
-110,204485,R. Mahrez,Riyad Mahrez,27,Algeria,Manchester City,SUB
+sofifa_id,short_name,long_name,age,nationality,club,team_position
+20801,Cristiano Ronaldo,Cristiano Ronaldo dos Santos Aveiro,33,Portugal,Juventus,LW
+158023,L. Messi,Lionel Andrés Messi Cuccittini,31,Argentina,FC Barcelona,RW
+190871,Neymar Jr,Neymar da Silva Santos Junior,26,Brazil,Paris Saint-Germain,CAM
+193080,De Gea,David De Gea Quintana,27,Spain,Manchester United,GK
+192985,K. De Bruyne,Kevin De Bruyne,27,Belgium,Manchester City,RCM
+155862,Sergio Ramos,Sergio Ramos García,32,Spain,Real Madrid,LCB
+176580,L. Suárez,Luis Alberto Suárez Díaz,31,Uruguay,FC Barcelona,ST
+177003,L. Modrić,Luka Modrić,32,Croatia,Real Madrid,RCM
+183277,E. Hazard,Eden Hazard,27,Belgium,Chelsea,LW
+200389,J. Oblak,Jan Oblak,25,Slovenia,Atlético Madrid,GK
+192119,T. Courtois,Thibaut Courtois,26,Belgium,Real Madrid,GK
+167495,M. Neuer,Manuel Neuer,32,Germany,FC Bayern München,GK
+182493,D. Godín,Diego Godín,32,Uruguay,Atlético Madrid,LCB
+182521,T. Kroos,Toni Kroos,28,Germany,Real Madrid,LCM
+188545,R. Lewandowski,Robert Lewandowski,29,Poland,FC Bayern München,ST
+211110,P. Dybala,Paulo Bruno Exequiel Dybala,24,Argentina,Juventus,RW
+192448,M. ter Stegen,Marc-André ter Stegen,26,Germany,FC Barcelona,GK
+197781,Isco,Francisco Román Alarcón Suárez,26,Spain,Real Madrid,SUB
+202126,H. Kane,Harry Kane,24,England,Tottenham Hotspur,ST
+194765,A. Griezmann,Antoine Griezmann,27,France,Atlético Madrid,RS
+215914,N. Kanté,N'Golo Kanté,27,France,Chelsea,RCM
+138956,G. Chiellini,Giorgio Chiellini,33,Italy,Juventus,LCB
+153079,S. Agüero,Sergio Leonel Agüero del Castillo,30,Argentina,Manchester City,ST
+168542,David Silva,David Josué Jiménez Silva,32,Spain,Manchester City,LCM
+178603,M. Hummels,Mats  Hummels,29,Germany,FC Bayern München,LCB
+179813,E. Cavani,Edinson Roberto Cavani Gómez,31,Uruguay,Paris Saint-Germain,ST
+190460,C. Eriksen,Christian  Dannemann Eriksen,26,Denmark,Tottenham Hotspur,RM
+195864,P. Pogba,Paul Pogba,25,France,Manchester United,LCM
+200145,Casemiro,Carlos Henrique Venancio Casimiro,26,Brazil,Real Madrid,CDM
+189242,Coutinho,Philippe Coutinho Correia,26,Brazil,FC Barcelona,LCM
+198710,J. Rodríguez,James David Rodríguez Rubio,26,Colombia,FC Bayern München,SUB
+209331,M. Salah,Mohamed  Salah Ghaly,26,Egypt,Liverpool,RW
+1179,G. Buffon,Gianluigi Buffon,40,Italy,Paris Saint-Germain,SUB
+162835,S. Handanovič,Samir Handanovič,33,Slovenia,Inter,GK
+164240,Thiago Silva,Thiago Emiliano da Silva,33,Brazil,Paris Saint-Germain,LCB
+167664,G. Higuaín,Gonzalo Gerardo Higuaín,30,Argentina,Milan,ST
+167948,H. Lloris,Hugo Lloris,31,France,Tottenham Hotspur,GK
+173731,G. Bale,Gareth Frank Bale,28,Wales,Real Madrid,RW
+176676,Marcelo,Marcelo Vieira da Silva Júnior,30,Brazil,Real Madrid,LB
+189511,Sergio Busquets,Sergio Busquets i Burgos,29,Spain,FC Barcelona,CDM
+198219,L. Insigne,Lorenzo Insigne,27,Italy,Napoli,LW
+231747,K. Mbappé,Kylian Mbappé,19,France,Paris Saint-Germain,RW
+205600,S. Umtiti,Samuel Umtiti,24,France,FC Barcelona,LCB
+201024,K. Koulibaly,Kalidou Koulibaly,27,Senegal,Napoli,LCB
+201399,M. Icardi,Mauro Emanuel Icardi Rivero,25,Argentina,Inter,ST
+192505,R. Lukaku,Romelu Lukaku,25,Belgium,Manchester United,ST
+152729,Piqué,Gerard Piqué Bernabéu,31,Spain,FC Barcelona,RCB
+168651,I. Rakitić,Ivan Rakitić,30,Croatia,FC Barcelona,RCM
+171877,M. Hamšík,Marek Hamšík,30,Slovakia,Napoli,CM
+172871,J. Vertonghen,Jan Vertonghen,31,Belgium,Tottenham Hotspur,LCB
+175943,D. Mertens,Dries Mertens,31,Belgium,Napoli,SUB
+184941,A. Sánchez,Alexis Alejandro Sánchez Sánchez,29,Chile,Manchester United,LW
+188567,P. Aubameyang,Pierre-Emerick Aubameyang,29,Gabon,Arsenal,LM
+189332,Jordi Alba,Jordi Alba Ramos,29,Spain,FC Barcelona,LB
+192387,C. Immobile,Ciro Immobile,28,Italy,Lazio,ST
+193041,K. Navas,Keylor Navas,31,Costa Rica,Real Madrid,SUB
+222492,L. Sané,Leroy Sané,22,Germany,Manchester City,LW
+201535,R. Varane,Raphaël Varane,25,France,Real Madrid,RCB
+210257,Ederson,Ederson Santana de Moraes,24,Brazil,Manchester City,GK
+199556,M. Verratti,Marco Verratti,25,Italy,Paris Saint-Germain,RCM
+201942,Roberto Firmino,Roberto Firmino Barbosa de Oliveira,26,Brazil,Liverpool,CF
+184432,Azpilicueta,César Azpilicueta Tanco,28,Spain,Chelsea,RB
+208722,S. Mané,Sadio Mané,26,Senegal,Liverpool,LW
+135507,Fernandinho,Fernando Luiz Rosa,33,Brazil,Manchester City,CDM
+171919,Naldo,Ronaldo  Aparecido Rodrigues,35,Brazil,FC Schalke 04,CB
+176635,M. Özil,Mesut Özil,29,Germany,Arsenal,RM
+177509,M. Benatia,Medhi Amine El Mouttaqi Benatia,31,Morocco,Juventus,SUB
+180206,M. Pjanić,Miralem Pjanić,28,Bosnia Herzegovina,Juventus,CDM
+181458,I. Perišić,Ivan Perišić,29,Croatia,Inter,LM
+183907,J. Boateng,Jérôme Boateng,29,Germany,FC Bayern München,RCB
+184344,L. Bonucci,Leonardo Bonucci,31,Italy,Juventus,RCB
+189509,Thiago,Thiago Alcântara do Nascimento,27,Spain,FC Bayern München,CDM
+189513,Parejo,Daniel Parejo Muñoz,29,Spain,Valencia CF,RCM
+189596,T. Müller,Thomas Müller,28,Germany,FC Bayern München,RCM
+190483,Douglas Costa,Douglas Costa de Souza,27,Brazil,Juventus,SUB
+191043,Alex Sandro,Alex Sandro Lobo Silva,27,Brazil,Juventus,LB
+191202,N. Matić,Nemanja Matić,29,Serbia,Manchester United,CDM
+192366,N. Otamendi,Nicolás Hernán Otamendi,30,Argentina,Manchester City,LCB
+220834,Marco Asensio,Marco Asensio Willemsen,22,Spain,Real Madrid,LW
+232363,M. Škriniar,Milan Škriniar,23,Slovakia,Inter,RCB
+208421,Saúl,Saúl Ñíguez Esclápez,23,Spain,Atlético Madrid,LCM
+212831,Alisson,Alisson Ramses Becker,25,Brazil,Liverpool,GK
+223848,S. Milinković-Savić,Sergej Milinković-Savić,23,Serbia,Lazio,CM
+209499,Fabinho,Fábio Henrique Tavares,24,Brazil,Liverpool,SUB
+216594,N. Fekir,Nabil Fekir,24,France,Olympique Lyonnais,CAM
+202652,R. Sterling,Raheem Sterling,23,England,Manchester City,RW
+212622,J. Kimmich,Joshua Kimmich,23,Germany,FC Bayern München,RB
+192774,K. Manolas,Kostas Manolas,27,Greece,Roma,RCB
+197445,D. Alaba,David Olatukunbo Alaba,26,Austria,FC Bayern München,LB
+203376,V. van Dijk,Virgil van Dijk,26,Netherlands,Liverpool,LCB
+184087,T. Alderweireld,Toby Alderweireld,29,Belgium,Tottenham Hotspur,RCB
+193747,Koke,Jorge Resurrección Merodio,26,Spain,Atlético Madrid,RM
+9014,A. Robben,Arjen Robben,34,Netherlands,FC Bayern München,RM
+41236,Z. Ibrahimović,Zlatan Ibrahimović,36,Sweden,LA Galaxy,RS
+120533,Pepe,Képler Laveran Lima Ferreira,35,Portugal,Beşiktaş JK,RCB
+139720,V. Kompany,Vincent Kompany,32,Belgium,Manchester City,RCB
+156616,F. Ribéry,Franck Bilal Ribéry,35,France,FC Bayern München,LM
+164169,Filipe Luís,Filipe Luís Kasmirski,32,Brazil,Atlético Madrid,LB
+167397,Falcao,Radamel Falcao García Zárate,32,Colombia,AS Monaco,ST
+168609,Miranda,João Miranda de Souza Filho,33,Brazil,Inter,LCB
+170890,B. Matuidi,Blaise Matuidi,31,France,Juventus,LCM
+178518,R. Nainggolan,Radja Nainggolan,30,Belgium,Inter,CAM
+179844,Diego Costa,Diego da Silva Costa,29,Spain,Atlético Madrid,LS
+179846,S. Khedira,Sami Khedira,31,Germany,Juventus,RCM
+180930,E. Džeko,Edin Džeko,32,Bosnia Herzegovina,Roma,ST
+181872,A. Vidal,Arturo Vidal,31,Chile,FC Barcelona,SUB
+184267,Y. Brahimi,Yacine Brahimi,28,Algeria,FC Porto,LM
+187961,Paulinho,José Paulo Bezzera Maciel Júnior,29,Brazil,Guangzhou Evergrande Taobao FC,LDM
+188350,M. Reus,Marco Reus,29,Germany,Borussia Dortmund,LW
+192629,Iago Aspas,Iago Aspas Juncal,30,Spain,RC Celta,RW
+204485,R. Mahrez,Riyad Mahrez,27,Algeria,Manchester City,SUB
