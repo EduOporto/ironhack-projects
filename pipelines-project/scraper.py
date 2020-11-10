@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from bs2json import bs2json
 from selenium import webdriver
+import pandas as pd 
 
 def fplayer_scrap(player_id, data_rq, df_to_fill):
     # Key = table, V = columns I need to take from the table 
@@ -76,3 +77,9 @@ def gkeeper_scrap(player_id, data_rq, df_to_fill):
             values.append(0.0)
     
     return values
+
+def just_mean(right_df, left_df, name):
+    general_df = pd.merge(right_df, left_df, on='sofifa_id')
+    general_df[f'mean_{name}'] = (round(general_df.iloc[:,1:].mean(axis=1)*2)*10)
+    general_rat = general_df.iloc[:,[0,-1]]
+    return general_rat
