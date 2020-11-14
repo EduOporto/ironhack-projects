@@ -22,11 +22,11 @@ About schollar: https://api.census.gov/data/2018/acs/acs5/profile/groups/DP02.ht
 
 Querys link: http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/
 
- - Median age by region: demo_r_pjanind3?indic_de=MEDAGEPOP&precision=2&unit=YR
- - Proportions of population (0-14 / 25-44): demo_r_pjanind3?indic_de=PC_Y0_14&indic_de=PC_Y25_44&precision=2&unit=PC
- - Pupils and students enrolled by education level: educ_uoe_enra11?precision=2&sex=T&unit=NR&isced11=ED0&isced11=ED1&isced11=ED2
- - Participation rates in up to early secondary education levels at regional level: educ_uoe_enra15?precision=2&unit=RT&isced11=ED02-8&isced11=ED1_2
- - Participation rates of 4 year old children in education at regional level: educ_uoe_enra14?precision=2&unit=RT&age=Y4
+ - Median age by region: demo_r_pjanind3?geoLevel=nuts3&indic_de=MEDAGEPOP&precision=1&unit=YR&time=2019
+ - Proportions of population (0-14 / 25-44): demo_r_pjanind3?geoLevel=nuts3&indic_de=PC_Y0_14&indic_de=PC_Y25_44&precision=2&unit=PC&time=2019
+ - Pupils and students enrolled by education level: educ_uoe_enra11?geoLevel=nuts2&precision=2&sex=T&unit=NR&isced11=ED0&isced11=ED1&isced11=ED2&time=2018
+ - Participation rates in up to early secondary education levels at regional level: educ_uoe_enra15?geoLevel=nuts2&precision=2&unit=RT&isced11=ED02-8&isced11=ED1_2&time=2018
+ - Participation rates of 4 year old children in education at regional level: educ_uoe_enra14?geoLevel=nuts2&precision=2&unit=RT&time=2018&age=Y4
 
 # Some other API's
 
