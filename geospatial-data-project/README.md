@@ -27,3 +27,9 @@ Querys link: http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/
  - Pupils and students enrolled by education level: educ_uoe_enra11?precision=2&sex=T&unit=NR&isced11=ED0&isced11=ED1&isced11=ED2
  - Participation rates in up to early secondary education levels at regional level: educ_uoe_enra15?precision=2&unit=RT&isced11=ED02-8&isced11=ED1_2
  - Participation rates of 4 year old children in education at regional level: educ_uoe_enra14?precision=2&unit=RT&age=Y4
+
+# Some other API's
+
+ - Foursquare: https://foursquare.com/developers/
+ - Google API console: https://console.cloud.google.com/google/maps-apis/
+ 
