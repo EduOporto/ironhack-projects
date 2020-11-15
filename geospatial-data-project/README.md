@@ -1,3 +1,15 @@
+In order to find the perfect spot for our company's office I will consider the following aspects:
+
+ - A young and cheerful place: as the ages of all our employees are comprised between 25 and 40 year-old, I will look for a place with a low median age, where the percentage of people on that range is high, and where the leisure offer is so.
+ - Forthcoming families friendly: as 30% or our employees would need schools or kindergardens around, and some others cloud in the future, I will check on the schooling levels of the places, as well as how close and convenient those could be from the candidate office.
+ - Tech startups and design companies around: as more than 60% of our employees work in the development and design sections, I will try to sorround them with a creative vibe, looking that the area is close to other tech companies, so they can share, learn and improve their skills and knowledge.
+ - Well-connected: as our executives will need to travel around the continent, and also most of our employees, I will take care on how connected the place is with other points of the geography. Giving our employees the chance of traveling, either for work purposes or leisure, could be a good point, above all for those who could be relocated from far away.
+
+As the dataset of the possible offices does not have all the data I could require for filter and point a few candidates, I will need to enrich it with some data about demographics, transports or surrounding business.
+
+### Demographic data
+
+
 # Links & documentation for USA research
 
 https://pypi.org/project/census/
