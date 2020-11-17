@@ -56,4 +56,6 @@ Not less important than that (and probably related to that) is also the **leisur
 
 New York area is also a place **surrounded by top tech and design companies**, and well connected not just nationally but also internationally, with **three airports** within a radius of less than 20 kilometers.
 
+There is a total of **13 possible candidates** (blue marks in the map), surrounded by plenty of preschools and elementary schools (in green) and tech startups and design companies (in red).
+
 ![concl](pic/conclussion.jpg)
