@@ -7,7 +7,7 @@ There are few things more important for a company that wants to grow and settle 
  - Tech startups and design companies around: as more than 60% of our employees work in the development and design sections, I will try to sorround them with a creative vibe, looking that the area is close to other tech companies, so they can share, learn and improve their skills and knowledge.
  - Well-connected: as our executives will need to travel around the continent, and also most of our employees, I will take care on how connected the place is with other points of the geography. Giving our employees the chance of traveling, either for work purposes or leisure, could be a good point, above all for those who could be relocated from far away.
 
-![office_1](/Users/eduardooportoalonso/Documents/Cursos/Ironhack/datamad1020/ironhack-projects/geospatial-data-project/pic/How-Important-Is-Your-Physical-Office-Environment_-staffing-agency-in-Little-Rock-recruitment-services-in-Central-Arkansas-how-to-find-a-job-you-love.jpg)
+![office_1](pic/How-Important-Is-Your-Physical-Office-Environment_-staffing-agency-in-Little-Rock-recruitment-services-in-Central-Arkansas-how-to-find-a-job-you-love.jpg)
 
 As the dataset of the candidate offices is very dense, I will first divide it in two: one with all the offices located in the USA; and another with the ones located in European countries. 
 
@@ -32,7 +32,7 @@ In order to extract all the data I will need, I will be assisted by [*census*](h
 
 Through the [Foursquare Places API](https://developer.foursquare.com/places) I will be aware that nightlife is granted for our employees, checking that our new office has enough venues in a 10-kilometer radius.
 
-![pub_1](/Users/eduardooportoalonso/Documents/Cursos/Ironhack/datamad1020/ironhack-projects/geospatial-data-project/pic/download.gif)
+![pub_1](pic/15433523685635.jpg)
 
 ## Schooling offer
 
@@ -46,4 +46,14 @@ Using the same initial database, where plenty of tech and design companies are a
 
 Thanks to the [Lufthansa Open API](https://developer.lufthansa.com/docs/read/Home) I will be able to match each of the candidates in the final stage with its five closest airports.
 
-![airp](/Users/eduardooportoalonso/Documents/Cursos/Ironhack/datamad1020/ironhack-projects/geospatial-data-project/pic/147190131LCYSTOCK31stJANABK-jpg-1536x1024.jpg)
+![airp](pic/147190131LCYSTOCK31stJANABK-jpg-1536x1024.jpg)
+
+# Conlussions
+
+After this five filters my research concludes that the perfect spot for our office could be in Manhattan or New Jersey, as it is a young place, where the **median age** of its inhabitants moves around **30 years old**, and the ratio of people between **25 and 44** means more than **half of the total population**.  
+
+Not less important than that (and probably related to that) is also the **leisure offer** of the *city that never sleeps*, which is probably the best in the world. The area has also a **great educational perspective** for young families, not just thinking about the present, but in future basis. 
+
+New York area is also a place **surrounded by top tech and design companies**, and well connected not just nationally but also internationally, with **three airports** within a radius of less than 20 kilometers.
+
+![concl](pic/conclussion.jpg)
