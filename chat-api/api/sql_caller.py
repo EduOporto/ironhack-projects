@@ -23,3 +23,22 @@ def user_call(user_nick):
     res = pd.read_sql(con=conn, sql=query)
 
     return res['user_id'][0]
+
+def chat_checker(sender, receiver, chat_id=False):
+    conn = engine_connector()
+
+    query = f"""SELECT chat_id FROM chat_api.users_has_chats
+                WHERE (user_id_send={sender} AND users_id_recv={receiver}) OR 
+                (user_id_send={receiver} AND users_id_recv={sender});
+            """
+    
+    shape = pd.read_sql(con=conn, sql=query).shape[0]
+
+    if chat_id == False:
+        return shape
+    elif chat_id == True:
+        try:
+            return pd.read_sql(con=conn, sql=query)['chat_id'][0]
+        except:
+            return "This chat does not exist!"
+

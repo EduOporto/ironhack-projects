@@ -1,7 +1,9 @@
 from app import app
 from flask import request
 from bson import json_util
-from sql_caller import engine_connector, user_call
+from sql_caller import engine_connector, user_call, chat_checker
+import numpy as np
+from datetime import datetime
 
 ## Endpoints
 
@@ -27,14 +29,43 @@ def new_chat():
     user_id_send = user_call(sender_nick)
     user_id_recv = user_call(receiver_nick)
 
-    conn = engine_connector()
+    if chat_checker(user_id_send, user_id_recv) == 0:
 
-    query = f"""INSERT INTO chat_api.users_has_chats (chat_name, user_id_send, users_id_recv)
-    VALUES ('{sender_nick}-{receiver_nick}', '{user_id_send}', '{user_id_recv}');
-    """
-    conn.execute(query)
+        conn = engine_connector()
 
-    return f"Chat between {sender_nick} and {receiver_nick} succesfully added to our databases"
+        query = f"""INSERT INTO chat_api.users_has_chats (chat_name, user_id_send, users_id_recv)
+        VALUES ('{sender_nick}-{receiver_nick}', '{user_id_send}', '{user_id_recv}');
+        """
+        conn.execute(query)
+
+        return f"Chat between {sender_nick} and {receiver_nick} succesfully added to our databases"
+
+    else:
+        return f"Chat between {sender_nick} and {receiver_nick} already exists!"
+
+@app.route('/chat/addmessage')
+def add_message():
+    sender_nick = request.args.get('sender_nick')
+    receiver_nick = request.args.get('recv_nick')
+    message = request.args.get('message')
+
+    user_id_send = user_call(sender_nick)
+    user_id_recv = user_call(receiver_nick)
+    chat_id = chat_checker(user_id_send, user_id_recv, chat_id=True)
+
+    if isinstance(chat_id, np.int64):
+        conn = engine_connector()
+
+        query = f"""INSERT INTO chat_api.chat_messages (chat_id, message, message_date, message_sender_id)
+        VALUES ('{chat_id}', '{message}', '{datetime.now()}', '{user_id_send}');
+        """
+        conn.execute(query)
+
+        return f"Message succesfully sent"
+    else:
+        return chat_id
+
+
 
 @app.route('/group/create')
 def new_group():
@@ -60,4 +91,4 @@ def new_group():
                     """
         conn.execute(query)
 
-    return f"Group {group_name} succesfully created"
+    return f"Group {group_name} succesfully created"    
