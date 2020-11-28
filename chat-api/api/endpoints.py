@@ -12,8 +12,8 @@ def new_user():
     user_nick = request.args.get('user_nick')
     conn = engine_connector()
 
-    query = f"""INSERT INTO chat_api.users (user_name, user_nick, user_surname)
-    VALUES ('{user_name}', '{user_nick}', '{user_surname}');
+    query = f"""INSERT INTO chat_api.users (user_name, user_lastname, user_nick)
+    VALUES ('{user_name}', '{user_surname}', '{user_nick}');
     """
     conn.execute(query)
 
@@ -41,7 +41,7 @@ def new_group():
     args = request.args
     res = {k: v for k, v in args.items()}
     
-    if len(res) > 2 and 'admin_nick' in res and 'group_name' in res:
+    if 'admin_nick' in res and 'group_name' in res:
         q_columns = ['group_name', 'user_id_admin', 'user_1_id', 'user_2_id', 'user_3_id']
         q_len = len(res)
 
