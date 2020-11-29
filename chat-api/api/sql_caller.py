@@ -14,15 +14,18 @@ def engine_connector():
     return engine.connect()
 
 def user_call(user_nick):
-    conn = engine_connector()
+    try:
+        conn = engine_connector()
 
-    query = f"""SELECT user_nick, user_id
-    FROM chat_api.users
-    WHERE user_nick = '{user_nick}';
-    """
-    res = pd.read_sql(con=conn, sql=query)
+        query = f"""SELECT user_nick, user_id
+        FROM chat_api.users
+        WHERE user_nick = '{user_nick}';
+        """
+        res = pd.read_sql(con=conn, sql=query)
 
-    return res['user_id'][0]
+        return res['user_id'][0]
+    except:
+        return f"User '{user_nick}' not in the database. Please, register this user first"
 
 def chat_checker(sender, receiver, chat_id=False):
     conn = engine_connector()
@@ -40,13 +43,29 @@ def chat_checker(sender, receiver, chat_id=False):
         except:
             return "This chat does not exist!"
 
-def group_checker(group_name):
+def group_checker(group_name, sender_id, check_admin=False, check_space=False):
     conn = engine_connector()
 
-    query = f"""SELECT group_id
-    FROM chat_api.users_has_groups
-    WHERE group_name = '{group_name}';
-    """
-    res = pd.read_sql(con=conn, sql=query)
+    try:
+        query = f"""SELECT *
+        FROM chat_api.users_has_groups
+        WHERE group_name = '{group_name}';
+        """
+        res = pd.read_sql(con=conn, sql=query)
 
-    return res['group_id'][0]
+        if check_admin == True and check_space == True:
+            if sender_id == res['user_id_admin'][0] and None in res.iloc[0,-4:].to_list():
+                users = res.iloc[0,-4:]
+                column = [index for index, value in users.iteritems() if value == None][0]
+                return (res['group_id'][0], column)
+            elif sender_id == res['user_id_admin'][0] and None not in res.iloc[0,-4:].to_list():
+                return f"Sorry, '{group_name}' group is full"
+            else:
+                return "Invalid admin nick for this group"     
+        elif check_admin == False and check_space == False:
+            if sender_id in res.iloc[0,-4:].to_list():
+                return res['group_id'][0]
+            else:
+                return f"Cannot send this message to '{group_name}', you are not in the group"
+    except:
+        return f"Group '{group_name}' does not exists..."

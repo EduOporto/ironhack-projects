@@ -12,3 +12,8 @@ group/create?group_name=Atleti&admin_nick=Pelayo&recv1_nick=Arda&recv2_nick=Koke
 
 #### Send message to group
 /group/addmessage?group_name=Atleti&sender_nick=Koke&message=Hi_guys
+
+#### Add user to group
+group/adduser?group_name=Atleti&admin_nick=Pelayo&new_user_nick=Arda
+
+#### Get chat history

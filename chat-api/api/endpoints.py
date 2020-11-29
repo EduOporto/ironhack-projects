@@ -1,9 +1,10 @@
 from app import app
 from flask import request
 from bson import json_util
-from sql_caller import engine_connector, user_call, chat_checker
+from sql_caller import engine_connector, user_call, chat_checker, group_checker
 import numpy as np
 from datetime import datetime
+from string_fixer import string_fixer
 
 ## Endpoints
 
@@ -57,7 +58,7 @@ def add_message():
         conn = engine_connector()
 
         query = f"""INSERT INTO chat_api.chat_messages (chat_id, user_id, message, message_date)
-        VALUES ('{chat_id}', '{user_id_send}', '{message.replace("_", " ")}', '{datetime.now()}');
+        VALUES ('{chat_id}', '{user_id_send}', '{string_fixer(message, to_db=True)}', '{datetime.now()}');
         """
         conn.execute(query)
 
@@ -91,9 +92,55 @@ def new_group():
 
     return f"Group {group_name} succesfully created"    
 
-# /group/addmessage?group_name=Atleti&sender_nick=Koke&message=Hi_guys
 @app.route('/group/addmessage')
 def group_add_message():
     group_name = request.args.get('group_name')
     sender_nick = request.args.get('sender_nick')
     message = request.args.get('message')
+
+    sender_id = user_call(sender_nick)
+    group_id = group_checker(group_name, sender_id)
+
+    if isinstance(group_id, np.int64):
+        conn = engine_connector()
+
+        query = f"""INSERT INTO chat_api.group_messages (group_id, user_id, message, message_date)
+        VALUES ('{group_id}', '{sender_id}', '{string_fixer(message, to_db=True)}', '{datetime.now()}');
+        """
+        conn.execute(query)
+
+        return "Message succesfully sent"
+    else:
+        return group_id
+
+@app.route('/group/adduser')
+def group_add_user():
+    group_name = request.args.get('group_name')
+    new_user = request.args.get('new_user_nick')
+
+    admin_id = user_call(request.args.get('admin_nick'))
+    group_id = group_checker(group_name, admin_id, check_admin=True, check_space=True)
+    new_user_id = user_call(new_user)
+
+    if isinstance(group_id, tuple):
+        group_id, column = group_id[0], group_id[1]
+        conn = engine_connector()
+
+        query = f"""UPDATE chat_api.users_has_groups 
+                    SET {column} = {new_user_id}
+                    WHERE group_id = {group_id};
+                """
+
+        conn.execute(query)
+
+        return f"User '{new_user}' succesfully added to group '{group_name}'"
+    else:
+        return group_id        
+
+
+
+
+
+
+
+
