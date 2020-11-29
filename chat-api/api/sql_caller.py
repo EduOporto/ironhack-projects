@@ -46,7 +46,7 @@ def chat_checker(sender, receiver, chat_id=False):
         except:
             return "This chat does not exist!"
 
-def group_checker(group_name, sender_id, check_admin=False, check_space=False):
+def group_checker(group_name, sender_id, new_user=None, check_admin=False, check_space=False):
     conn = engine_connector()
 
     try:
@@ -56,16 +56,21 @@ def group_checker(group_name, sender_id, check_admin=False, check_space=False):
         """
         res = pd.read_sql(con=conn, sql=query)
 
-        if check_admin == True and check_space == True:
-            if sender_id == res['user_id_admin'][0] and None in res.iloc[0,-4:].to_list():
+        if check_admin == True and check_space == True and new_user != None:
+            users_list = res.iloc[0,-4:].to_list()
+            new_user_id = user_call(new_user)
+            if sender_id == res['user_id_admin'][0] and new_user_id not in users_list and None in users_list:
                 users = res.iloc[0,-4:]
                 column = [index for index, value in users.iteritems() if value == None][0]
                 return (res['group_id'][0], column)
             elif sender_id == res['user_id_admin'][0] and None not in res.iloc[0,-4:].to_list():
                 return f"Sorry, '{group_name}' group is full"
+            elif sender_id == res['user_id_admin'][0] and new_user_id in users_list:
+                return f"'{new_user}' is already in the group!"
             else:
                 return "Invalid admin nick for this group"     
-        elif check_admin == False and check_space == False:
+        
+        elif check_admin == False and check_space == False and new_user == None:
             if sender_id in res.iloc[0,-4:].to_list():
                 return res['group_id'][0]
             else:

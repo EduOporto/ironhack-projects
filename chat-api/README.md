@@ -1,7 +1,7 @@
 #### Add user
 new_user?user_name=Angel&user_surname=Correa&user_nick=Correa
 
-#### CHATS ####
+                            #### CHATS ####
 
 #### Create chat
 chat/create?sender_nick=Correa&recv_nick=Pelayo
@@ -12,7 +12,7 @@ chat/addmessage?sender_nick=angrybird736&recv_nick=silvergoose367&message=Hello_
 #### Get chat history
 chat/list?user_nick=Koke&recv_nick=Correa
 
-#### GROUPS ####
+                            #### GROUPS ####
 
 #### Create group
 group/create?group_name=Atleti&admin_nick=Pelayo&recv1_nick=Arda&recv2_nick=Koke

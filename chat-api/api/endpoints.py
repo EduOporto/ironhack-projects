@@ -146,8 +146,8 @@ def group_add_user():
     new_user = request.args.get('new_user_nick')
 
     admin_id = user_call(request.args.get('admin_nick'))
-    group_id = group_checker(group_name, admin_id, check_admin=True, check_space=True)
     new_user_id = user_call(new_user)
+    group_id = group_checker(group_name, admin_id, new_user=new_user, check_admin=True, check_space=True)
 
     if isinstance(group_id, tuple):
         group_id, column = group_id[0], group_id[1]
