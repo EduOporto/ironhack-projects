@@ -36,7 +36,10 @@ def chat_checker(sender, receiver, chat_id=False):
             """
 
     if chat_id == False:
-        return pd.read_sql(con=conn, sql=query).shape[0]
+        try:
+            return pd.read_sql(con=conn, sql=query).shape[0]
+        except:
+            return "This chat does not exist!"
     elif chat_id == True:
         try:
             return pd.read_sql(con=conn, sql=query)['chat_id'][0]
@@ -66,6 +69,6 @@ def group_checker(group_name, sender_id, check_admin=False, check_space=False):
             if sender_id in res.iloc[0,-4:].to_list():
                 return res['group_id'][0]
             else:
-                return f"Cannot send this message to '{group_name}', you are not in the group"
+                return f"You cannot access to '{group_name}', as you are not in the group"
     except:
         return f"Group '{group_name}' does not exists..."

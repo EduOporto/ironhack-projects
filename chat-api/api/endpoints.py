@@ -5,6 +5,8 @@ from sql_caller import engine_connector, user_call, chat_checker, group_checker
 import numpy as np
 from datetime import datetime
 from string_fixer import string_fixer
+import pandas as pd
+import json
 
 ## Endpoints
 
@@ -66,6 +68,31 @@ def add_message():
     else:
         return chat_id
 
+@app.route('/chat/list')
+def get_chat():
+    user_id = user_call(request.args.get('user_nick'))
+    recv_id = user_call(request.args.get('recv_nick'))
+    chat_id = chat_checker(user_id, recv_id, chat_id=True)
+
+    try:
+        conn = engine_connector()
+
+        query = f"""SELECT 
+                        chat_id, 
+                        chat_api.chat_messages.user_id AS user_id, 
+                        chat_api.users.user_nick AS user_nick, 
+                        message, 
+                        message_date 
+                    FROM chat_api.chat_messages
+                    JOIN chat_api.users ON 
+                        chat_api.chat_messages.user_id = chat_api.users.user_id
+                    WHERE chat_id = {chat_id}
+                """
+        res = pd.read_sql(con=conn, sql=query).to_json(date_format='iso', force_ascii=True)
+        return json.loads(res)
+    except:
+        return chat_id
+        
 @app.route('/group/create')
 def new_group():
     args = request.args
@@ -135,12 +162,31 @@ def group_add_user():
 
         return f"User '{new_user}' succesfully added to group '{group_name}'"
     else:
-        return group_id        
+        return group_id
 
+@app.route('/group/list')
+def get_group():
+    group_name = request.args.get('group_name')
+    user_id = user_call(request.args.get('user_nick'))
 
+    group_id = group_checker(group_name, user_id)
 
+    try:
+        conn = engine_connector()
 
-
-
-
+        query = f"""SELECT 
+                        group_id, 
+                        chat_api.group_messages.user_id AS user_id, 
+                        chat_api.users.user_nick AS user_nick, 
+                        message, 
+                        message_date 
+                    FROM chat_api.group_messages
+                    JOIN chat_api.users ON 
+                        chat_api.group_messages.user_id = chat_api.users.user_id
+                    WHERE group_id = {group_id}
+                """
+        res = pd.read_sql(con=conn, sql=query).to_json(date_format='iso', force_ascii=True)
+        return json.loads(res)
+    except:
+        return group_id
 
