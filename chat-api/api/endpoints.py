@@ -33,7 +33,7 @@ def new_chat():
 
         conn = engine_connector()
 
-        query = f"""INSERT INTO chat_api.users_has_chats (chat_name, user_id_send, users_id_recv)
+        query = f"""INSERT INTO chat_api.users_has_chats (chat_name, user_id_send, user_id_recv)
         VALUES ('{sender_nick}-{receiver_nick}', '{user_id_send}', '{user_id_recv}');
         """
         conn.execute(query)
@@ -61,11 +61,9 @@ def add_message():
         """
         conn.execute(query)
 
-        return f"Message succesfully sent"
+        return "Message succesfully sent"
     else:
         return chat_id
-
-
 
 @app.route('/group/create')
 def new_group():
