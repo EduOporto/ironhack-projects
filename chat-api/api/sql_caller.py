@@ -40,3 +40,13 @@ def chat_checker(sender, receiver, chat_id=False):
         except:
             return "This chat does not exist!"
 
+def group_checker(group_name):
+    conn = engine_connector()
+
+    query = f"""SELECT group_id
+    FROM chat_api.users_has_groups
+    WHERE group_name = '{group_name}';
+    """
+    res = pd.read_sql(con=conn, sql=query)
+
+    return res['group_id'][0]

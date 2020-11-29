@@ -56,8 +56,8 @@ def add_message():
     if isinstance(chat_id, np.int64):
         conn = engine_connector()
 
-        query = f"""INSERT INTO chat_api.chat_messages (chat_id, message, message_date, message_sender_id)
-        VALUES ('{chat_id}', '{message}', '{datetime.now()}', '{user_id_send}');
+        query = f"""INSERT INTO chat_api.chat_messages (chat_id, user_id, message, message_date)
+        VALUES ('{chat_id}', '{user_id_send}', '{message.replace("_", " ")}', '{datetime.now()}');
         """
         conn.execute(query)
 
@@ -90,3 +90,10 @@ def new_group():
         conn.execute(query)
 
     return f"Group {group_name} succesfully created"    
+
+# /group/addmessage?group_name=Atleti&sender_nick=Koke&message=Hi_guys
+@app.route('/group/addmessage')
+def group_add_message():
+    group_name = request.args.get('group_name')
+    sender_nick = request.args.get('sender_nick')
+    message = request.args.get('message')
