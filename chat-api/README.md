@@ -103,3 +103,13 @@ Example:
 > user_hist?user_nick={...}
 >
 > user_hist?user_nick=Koke
+
+## **SQL DATABASE**
+
+In order to 
+
+## **FEELINGS WITH DUMMIES**
+
+In order to show how this API could analyze the feelings of a chat/group, I have created a Jupyter notebook that can fill the database, from adding random users to fill its chats and groups with random quotes. 
+
+In order to see this, the whole notebook called [database_filler.ipynb](https://github.com/EduOporto/ironhack-projects/blob/main/chat-api/database_filler.ipynb) must be entirely ran.
