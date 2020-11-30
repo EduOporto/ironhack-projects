@@ -10,6 +10,8 @@ import json
 
 ## Endpoints
 
+## GENERALS ##
+
 @app.route('/new_user')
 def new_user():
     user_name = request.args.get('user_name')
@@ -23,6 +25,43 @@ def new_user():
     conn.execute(query)
 
     return f"{user_nick} succesfully added to our databases"
+
+@app.route('/user_hist')
+def user_hist():
+    user_nick = request.args.get('user_nick')
+    user_id = user_call(user_nick)
+
+    conn = engine_connector()
+
+    query_chats = f"""SELECT 
+                        chat_id AS id,
+                        chat_name AS name
+                      FROM chat_api.users_has_chats
+                      WHERE user_id_send = {user_id} OR user_id_recv = {user_id}
+                  """
+
+    query_groups = f"""SELECT 
+                            group_id AS id,
+                            group_name AS name
+                       FROM chat_api.users_has_groups
+                       WHERE user_id_admin = {user_id} OR 
+                             user_1_id = {user_id} OR 
+                             user_2_id = {user_id} OR 
+                             user_3_id = {user_id}
+                   """
+
+    res_chats = pd.read_sql(con=conn, sql=query_chats)
+    res_chats['name'] = res_chats['name'].apply(lambda x: x.replace(user_nick, '').replace('-', ''))
+    res_chats.insert(1, 'type', 'chat')
+    
+    res_groups = pd.read_sql(con=conn, sql=query_groups)
+    res_groups.insert(1, 'type', 'group')
+
+    res = pd.concat([res_chats, res_groups], ignore_index=True).to_json(date_format='iso', force_ascii=True)
+    
+    return json.loads(res)
+
+## CHATS ##
 
 @app.route('/chat/create')
 def new_chat():
@@ -93,6 +132,8 @@ def get_chat():
     except:
         return chat_id
         
+## GROUPS ##
+
 @app.route('/group/create')
 def new_group():
     args = request.args

@@ -1,6 +1,9 @@
 #### Add user
 new_user?user_name=Angel&user_surname=Correa&user_nick=Correa
 
+#### User history
+user_hist?user_nick=Correa
+
                             #### CHATS ####
 
 #### Create chat
