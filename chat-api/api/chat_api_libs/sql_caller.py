@@ -1,8 +1,7 @@
 from sqlalchemy import create_engine
-from getpass import getpass
 from dotenv import load_dotenv
-import pandas as pd
 import os
+import pandas as pd
 from random import choice
 
 def engine_connector():

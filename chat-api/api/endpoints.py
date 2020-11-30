@@ -7,6 +7,7 @@ from datetime import datetime
 from chat_api_libs.string_fixer import string_fixer
 import pandas as pd
 import json
+from chat_api_libs.hist_mood import concater
 
 ## Connect to SQL database
 con = sql.engine_connector()
@@ -65,6 +66,7 @@ def user_hist(conn=con):
     res = pd.concat([res_chats, res_groups], ignore_index=True).to_json(date_format='iso', force_ascii=True)
     
     return json.loads(res)
+    
 
 ############################### CHATS ###############################
 
@@ -135,6 +137,34 @@ def get_chat(conn=con):
         return json.loads(res)
     except:
         return chat_id
+
+## Get message history with mood
+@app.route('/chat/list_mood')
+def user_hist_mood(conn=con):
+    user_id = sql.user_call(request.args.get('user_nick'))
+    recv_id = sql.user_call(request.args.get('recv_nick'))
+    chat_id = sql.chat_checker(user_id, recv_id, chat_id=True)
+
+    try:
+
+        query = f"""SELECT 
+                        chat_id, 
+                        chat_api.chat_messages.user_id AS user_id, 
+                        chat_api.users.user_nick AS user_nick, 
+                        message, 
+                        message_date 
+                    FROM chat_api.chat_messages
+                    JOIN chat_api.users ON 
+                        chat_api.chat_messages.user_id = chat_api.users.user_id
+                    WHERE chat_id = {chat_id}
+                """
+        res = pd.read_sql(con=conn, sql=query)
+
+        return concater(res).to_json()
+    except:
+        return chat_id
+    
+
         
 ############################### GROUPS ###############################
 
@@ -234,3 +264,28 @@ def get_group(conn=con):
     except:
         return group_id
 
+## Get message history with mood
+@app.route('/group/list_mood')
+def group_hist_mood(conn=con):
+    group_name = request.args.get('group_name')
+    user_id = sql.user_call(request.args.get('user_nick'))
+
+    group_id = sql.get_group_id(group_name, user_id)
+
+    try:
+        query = f"""SELECT 
+                        group_id, 
+                        chat_api.group_messages.user_id AS user_id, 
+                        chat_api.users.user_nick AS user_nick, 
+                        message, 
+                        message_date 
+                    FROM chat_api.group_messages
+                    JOIN chat_api.users ON 
+                        chat_api.group_messages.user_id = chat_api.users.user_id
+                    WHERE group_id = {group_id}
+                """
+        res = pd.read_sql(con=conn, sql=query)
+        
+        return concater(res).to_json()
+    except:
+        return group_id
