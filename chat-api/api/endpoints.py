@@ -1,10 +1,10 @@
 from app import app
 from flask import request
 from bson import json_util
-import sql_caller as sql
+import chat_api_libs.sql_caller as sql
 import numpy as np
 from datetime import datetime
-from string_fixer import string_fixer
+from chat_api_libs.string_fixer import string_fixer
 import pandas as pd
 import json
 
