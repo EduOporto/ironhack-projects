@@ -1,37 +1,42 @@
 from app import app
 from flask import request
 from bson import json_util
-from sql_caller import engine_connector, user_call, chat_checker, group_checker
+import sql_caller as sql
 import numpy as np
 from datetime import datetime
 from string_fixer import string_fixer
 import pandas as pd
 import json
 
-## Endpoints
+## Connect to SQL database
+con = sql.engine_connector()
 
-## GENERALS ##
+############################### ENDPOINTS ###############################
 
+############################### GENERALS ###############################
+
+## Add a new user
 @app.route('/new_user')
-def new_user():
-    user_name = request.args.get('user_name')
-    user_surname = request.args.get('user_surname')
-    user_nick = request.args.get('user_nick')
-    conn = engine_connector()
+def new_user(conn=con):
+    try:
+        user_name = request.args.get('user_name')
+        user_surname = request.args.get('user_surname')
+        user_nick = request.args.get('user_nick')
 
-    query = f"""INSERT INTO chat_api.users (user_name, user_lastname, user_nick)
-    VALUES ('{user_name}', '{user_surname}', '{user_nick}');
-    """
-    conn.execute(query)
+        query = f"""INSERT INTO chat_api.users (user_name, user_lastname, user_nick)
+        VALUES ('{user_name}', '{user_surname}', '{user_nick}');
+        """
+        conn.execute(query)
 
-    return f"{user_nick} succesfully added to our databases"
+        return f"{user_nick} succesfully added to our databases"
+    except:
+        return f"{user_nick} already exists in our databases. Try for a different one"
 
+## Get user history as a list of chats and groups
 @app.route('/user_hist')
-def user_hist():
+def user_hist(conn=con):
     user_nick = request.args.get('user_nick')
-    user_id = user_call(user_nick)
-
-    conn = engine_connector()
+    user_id = sql.user_call(user_nick)
 
     query_chats = f"""SELECT 
                         chat_id AS id,
@@ -61,19 +66,18 @@ def user_hist():
     
     return json.loads(res)
 
-## CHATS ##
+############################### CHATS ###############################
 
+## Create a new chat
 @app.route('/chat/create')
-def new_chat():
+def new_chat(conn=con):
     sender_nick = request.args.get('sender_nick') 
     receiver_nick = request.args.get('recv_nick')
     
-    user_id_send = user_call(sender_nick)
-    user_id_recv = user_call(receiver_nick)
+    user_id_send = sql.user_call(sender_nick)
+    user_id_recv = sql.user_call(receiver_nick)
 
-    if chat_checker(user_id_send, user_id_recv) == 0:
-
-        conn = engine_connector()
+    if sql.chat_checker(user_id_send, user_id_recv) == 0:
 
         query = f"""INSERT INTO chat_api.users_has_chats (chat_name, user_id_send, user_id_recv)
         VALUES ('{sender_nick}-{receiver_nick}', '{user_id_send}', '{user_id_recv}');
@@ -85,18 +89,18 @@ def new_chat():
     else:
         return f"Chat between {sender_nick} and {receiver_nick} already exists!"
 
+## Text a message to a chat
 @app.route('/chat/addmessage')
-def add_message():
+def add_message(conn=con):
     sender_nick = request.args.get('sender_nick')
     receiver_nick = request.args.get('recv_nick')
     message = request.args.get('message')
 
-    user_id_send = user_call(sender_nick)
-    user_id_recv = user_call(receiver_nick)
-    chat_id = chat_checker(user_id_send, user_id_recv, chat_id=True)
+    user_id_send = sql.user_call(sender_nick)
+    user_id_recv = sql.user_call(receiver_nick)
+    chat_id = sql.chat_checker(user_id_send, user_id_recv, chat_id=True)
 
     if isinstance(chat_id, np.int64):
-        conn = engine_connector()
 
         query = f"""INSERT INTO chat_api.chat_messages (chat_id, user_id, message, message_date)
         VALUES ('{chat_id}', '{user_id_send}', '{string_fixer(message, to_db=True)}', '{datetime.now()}');
@@ -107,14 +111,14 @@ def add_message():
     else:
         return chat_id
 
+## Get message history of a given chat
 @app.route('/chat/list')
-def get_chat():
-    user_id = user_call(request.args.get('user_nick'))
-    recv_id = user_call(request.args.get('recv_nick'))
-    chat_id = chat_checker(user_id, recv_id, chat_id=True)
+def get_chat(conn=con):
+    user_id = sql.user_call(request.args.get('user_nick'))
+    recv_id = sql.user_call(request.args.get('recv_nick'))
+    chat_id = sql.chat_checker(user_id, recv_id, chat_id=True)
 
     try:
-        conn = engine_connector()
 
         query = f"""SELECT 
                         chat_id, 
@@ -132,10 +136,11 @@ def get_chat():
     except:
         return chat_id
         
-## GROUPS ##
+############################### GROUPS ###############################
 
+## Create a new group
 @app.route('/group/create')
-def new_group():
+def new_group(conn=con):
     args = request.args
     res = {k: v for k, v in args.items()}
     
@@ -146,12 +151,10 @@ def new_group():
         q_columns_str = ', '.join(q_columns[:q_len])
 
         group_name = res.pop('group_name')
-        users_ids = [user_call(x) for x in res.values()]
+        users_ids = [sql.user_call(x) for x in res.values()]
         comillas = lambda x: "'"+str(x)+"'"
         comillado = list(map(comillas, users_ids))
         q_values_str = ', '.join(comillado)
-
-        conn = engine_connector()
 
         query = f"""INSERT INTO chat_api.users_has_groups ({q_columns_str})
                         VALUES ('{group_name}', {q_values_str});
@@ -160,17 +163,17 @@ def new_group():
 
     return f"Group {group_name} succesfully created"    
 
+## Text a message to a group
 @app.route('/group/addmessage')
-def group_add_message():
+def group_add_message(conn=con):
     group_name = request.args.get('group_name')
     sender_nick = request.args.get('sender_nick')
     message = request.args.get('message')
 
-    sender_id = user_call(sender_nick)
-    group_id = group_checker(group_name, sender_id)
+    sender_id = sql.user_call(sender_nick)
+    group_id = sql.get_group_id(group_name, sender_id)
 
     if isinstance(group_id, np.int64):
-        conn = engine_connector()
 
         query = f"""INSERT INTO chat_api.group_messages (group_id, user_id, group_name, message, message_date)
         VALUES ('{group_id}', '{sender_id}', '{group_name}', '{string_fixer(message, to_db=True)}', '{datetime.now()}');
@@ -181,18 +184,19 @@ def group_add_message():
     else:
         return group_id
 
+## Add a new user to a group
 @app.route('/group/adduser')
-def group_add_user():
+def group_add_user(conn=con):
     group_name = request.args.get('group_name')
     new_user = request.args.get('new_user_nick')
+    admin = request.args.get('admin_nick')
 
-    admin_id = user_call(request.args.get('admin_nick'))
-    new_user_id = user_call(new_user)
-    group_id = group_checker(group_name, admin_id, new_user=new_user, check_admin=True, check_space=True)
+    admin_id = sql.user_call(admin)
+    new_user_id = sql.user_call(new_user)
+    group_id = sql.group_checker(group_name, admin_id, new_user)
 
     if isinstance(group_id, tuple):
         group_id, column = group_id[0], group_id[1]
-        conn = engine_connector()
 
         query = f"""UPDATE chat_api.users_has_groups 
                     SET {column} = {new_user_id}
@@ -205,16 +209,15 @@ def group_add_user():
     else:
         return group_id
 
+## Get message history of a given group
 @app.route('/group/list')
-def get_group():
+def get_group(conn=con):
     group_name = request.args.get('group_name')
-    user_id = user_call(request.args.get('user_nick'))
+    user_id = sql.user_call(request.args.get('user_nick'))
 
-    group_id = group_checker(group_name, user_id)
+    group_id = sql.get_group_id(group_name, user_id)
 
     try:
-        conn = engine_connector()
-
         query = f"""SELECT 
                         group_id, 
                         chat_api.group_messages.user_id AS user_id, 

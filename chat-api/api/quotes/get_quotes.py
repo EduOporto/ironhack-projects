@@ -1,3 +1,6 @@
+
+## This library returns an iterator with more than 30,000 quotes from famous people
+
 import pandas as pd 
 from random import shuffle
 
@@ -7,5 +10,3 @@ def get_quotes():
     shuffle(quotes)
     
     return iter(quotes)
-
-get_quotes()
