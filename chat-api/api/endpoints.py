@@ -172,8 +172,8 @@ def group_add_message():
     if isinstance(group_id, np.int64):
         conn = engine_connector()
 
-        query = f"""INSERT INTO chat_api.group_messages (group_id, user_id, message, message_date)
-        VALUES ('{group_id}', '{sender_id}', '{string_fixer(message, to_db=True)}', '{datetime.now()}');
+        query = f"""INSERT INTO chat_api.group_messages (group_id, user_id, group_name, message, message_date)
+        VALUES ('{group_id}', '{sender_id}', '{group_name}', '{string_fixer(message, to_db=True)}', '{datetime.now()}');
         """
         conn.execute(query)
 

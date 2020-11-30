@@ -16,17 +16,27 @@ def engine_connector():
 
 conn = engine_connector()
 
-def user_call(user_nick, conn=conn):
+def user_call(user, id=False, conn=conn):   
     try:
-        query = f"""SELECT user_nick, user_id
-        FROM chat_api.users
-        WHERE user_nick = '{user_nick}';
-        """
-        res = pd.read_sql(con=conn, sql=query)
+        if id == False:
+            query = f"""SELECT user_nick, user_id
+                FROM chat_api.users
+                WHERE user_nick = '{user}';
+                """
+            res = pd.read_sql(con=conn, sql=query)
 
-        return res['user_id'][0]
+            return res['user_id'][0]
+        elif id == True:
+            query = f"""SELECT user_nick, user_id
+                FROM chat_api.users
+                WHERE user_id = '{user}';
+                """
+            res = pd.read_sql(con=conn, sql=query)
+
+            return res['user_nick'][0]
     except:
-        return f"User '{user_nick}' not in the database. Please, register this user first"
+        return f"User '{user}' not in the database. Please, register this user first"
+
 
 def chat_checker(sender, receiver, chat_id=False, conn=conn):
 
@@ -88,3 +98,14 @@ def get_chats(random_chat=False, conn=conn):
     elif random_chat == True:
         chats_list = df['chat_name'].to_list()
         return choice(chats_list)
+
+def get_groups(random_group=False, con=conn):
+    query = f"""SELECT *
+                FROM chat_api.users_has_groups"""
+
+    df = pd.read_sql(con=conn, sql=query)
+
+    if random_group == False:
+        return df
+    elif random_group == True:
+        return df.sample()
