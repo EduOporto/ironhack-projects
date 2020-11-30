@@ -3,6 +3,7 @@ from getpass import getpass
 from dotenv import load_dotenv
 import pandas as pd
 import os
+from random import choice
 
 def engine_connector():
     load_dotenv()
@@ -13,10 +14,10 @@ def engine_connector():
     
     return engine.connect()
 
-def user_call(user_nick):
-    try:
-        conn = engine_connector()
+conn = engine_connector()
 
+def user_call(user_nick, conn=conn):
+    try:
         query = f"""SELECT user_nick, user_id
         FROM chat_api.users
         WHERE user_nick = '{user_nick}';
@@ -27,8 +28,7 @@ def user_call(user_nick):
     except:
         return f"User '{user_nick}' not in the database. Please, register this user first"
 
-def chat_checker(sender, receiver, chat_id=False):
-    conn = engine_connector()
+def chat_checker(sender, receiver, chat_id=False, conn=conn):
 
     query = f"""SELECT chat_id FROM chat_api.users_has_chats
                 WHERE (user_id_send={sender} AND user_id_recv={receiver}) OR 
@@ -46,8 +46,7 @@ def chat_checker(sender, receiver, chat_id=False):
         except:
             return "This chat does not exist!"
 
-def group_checker(group_name, sender_id, new_user=None, check_admin=False, check_space=False):
-    conn = engine_connector()
+def group_checker(group_name, sender_id, new_user=None, check_admin=False, check_space=False, conn=conn):
 
     try:
         query = f"""SELECT *
@@ -77,3 +76,15 @@ def group_checker(group_name, sender_id, new_user=None, check_admin=False, check
                 return f"You cannot access to '{group_name}', as you are not in the group"
     except:
         return f"Group '{group_name}' does not exists..."
+
+def get_chats(random_chat=False, conn=conn):
+    query = f"""SELECT *
+            FROM chat_api.users_has_chats"""
+
+    df = pd.read_sql(con=conn, sql=query)
+
+    if random_chat == False:
+        return df
+    elif random_chat == True:
+        chats_list = df['chat_name'].to_list()
+        return choice(chats_list)
