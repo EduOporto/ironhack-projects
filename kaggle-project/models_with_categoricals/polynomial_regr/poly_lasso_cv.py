@@ -15,10 +15,13 @@ def poly_lasso_cv(min_degree, max_degree, X, y, test_size):
     for degree in range(min_degree,max_degree+1):
         model = make_pipeline(PolynomialFeatures(degree, 
                                                 interaction_only=False), 
-                            LassoCV(eps=0.0001,
-                                    n_alphas=20,
+                            LassoCV(eps=0.001,
+                                    n_alphas=100,
                                     max_iter=5000, 
-                                    normalize=True,cv=5))
+                                    normalize=True,
+                                    cv=10,
+                                    tol=0.0001,
+                                    verbose=0))
         model.fit(X_train,y_train)
 
         train_pred = model.predict(X_train) 
@@ -42,8 +45,6 @@ def poly_lasso_cv(min_degree, max_degree, X, y, test_size):
     return mae_dict, rmse_dict, rsquare_dict
 
 def poly_lasso_cv_pred(X_t, y_t, degree, X_p):
-
-    #X_train, X_test, y_train, y_test = train_test_split(X_t, y_t, test_size=test_size)
 
     model = make_pipeline(PolynomialFeatures(degree, 
                                             interaction_only=False), 
