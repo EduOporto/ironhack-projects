@@ -7,3 +7,8 @@ kaggle-project/data/.ipynb_checkpoints/dataset_setup-checkpoint.ipynb
 kaggle-project/models_with_categoricals/polynomial_regr/.ipynb_checkpoints/polynomial_regr-checkpoint.ipynb
 kaggle-project/models_with_categoricals/data/.DS_Store
 kaggle-project/data/.DS_Store
+kaggle-project/.ipynb_checkpoints
+kaggle-project/.DS_Store
+kaggle-project/models_with_categoricals/polynomial_regr/.ipynb_checkpoints
+kaggle-project/models_with_categoricals/polynomial_regr/__pycache__
+kaggle-project/models_with_categoricals/.DS_Store

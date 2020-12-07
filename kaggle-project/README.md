@@ -10,7 +10,7 @@ The lower the RMSE is, the better the model. The winner will be the one who gets
 
 ## Approach
 
-### Getting the data ready
+### [Getting the data ready](https://github.com/EduOporto/ironhack-projects/blob/main/kaggle-project/data/dataset_setup.ipynb)
 
 In order to get a good sense on how the dataframe is, I choose to start by looking for the types of the columns, check wether there are any null values or any other possible anomalies that could make my model not behave as expected.
 
