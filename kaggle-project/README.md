@@ -54,7 +54,7 @@ What the latter makes is fit the model along a regularization path, making the R
 
 ![pipeline_1](img/pipeline_1.png)
 
-### Polynomial Regression and LassoCV with feature dropping
+### [Polynomial Regression and LassoCV with feature dropping](https://github.com/EduOporto/ironhack-projects/blob/main/kaggle-project/models_with_categoricals/polynomial_regr/polynomial_regr_drop.ipynb)
 
 For this, I perform the same pipeline quoted above, but with three different combinations of data: dropping the features related to the size of the diamond (x, y and z), dropping the feature related to the weight of the diamond (carat), and dropping just the width and the depth of the diamond. 
 
