@@ -1,0 +1,4 @@
+.env
+.cache
+google_fit/gfit_service/client_secrets.json
+token_fitness_v1.pickle
